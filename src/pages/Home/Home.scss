@@ -1,0 +1,86 @@
+@use '@/variables.scss' as *;
+@use 'sass:color';
+
+// Common mixins for reusable styles
+@mixin section-fade-last {
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 400px;
+    background: linear-gradient(to bottom,
+      rgba(black, 1) 0%,
+      rgba(black, 0) 100%
+    );
+    z-index: 1;
+  }
+}
+
+@mixin background-image($url) {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 950px;
+  background-image: url($url);
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  z-index: 0;
+}
+
+// Hero Section
+#heroSection {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  display: flex;
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 200px;
+    background: linear-gradient(to bottom, rgba(black, 0) 0%, rgba(black, 1) 100%);
+  }
+}
+
+.heroTitle {
+  margin: auto;
+  font-family: $fontFamilyOldLondon;
+  color: $textColor;
+  font-size: $fontSizeGigantic;
+  text-align: center;
+  position: relative;
+  z-index: 1;
+}
+
+.backgroundGif {
+  @include background-image('@/assets/homeBackground.gif');
+  height: 100vh;
+}
+
+// Home Section
+#homeSection {
+  height: 750px;
+  background-color: black;
+  @include section-fade-last;
+}
+
+// Mobile Styles
+@media screen and (max-width: 768px) {
+  .heroTitle {
+    font-size: $fontSizeHugest;
+  }
+
+  #homeSection {
+    height: auto;
+    padding: 40px 0;
+  }
+}

@@ -1,0 +1,49 @@
+@use './variables.scss' as *;
+
+// Base styles
+html, #app {
+  position: relative;
+  background-color: black;
+  color: $textColor;
+  margin: 0;
+  padding: 0;
+}
+
+#app {
+  font-family: $fontFamilyBethany;
+  font-size: $fontSizeNormal;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+// Typography reset
+h1, h2, h3, p, a {
+  font-family: $fontFamilyBethany;
+  margin: 0;
+  padding: 0;
+}
+
+// Scrollbar styling
+::-webkit-scrollbar {
+  width: 10px;
+  background-color: $secondaryColor;
+
+  &-thumb {
+    background: $tertiaryColor;
+    border-radius: 10px;
+
+    &:hover {
+      background: $scrollbarHover;
+    }
+  }
+}
+
+// Utility classes
+.noSelect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}

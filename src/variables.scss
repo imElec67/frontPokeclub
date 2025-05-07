@@ -1,0 +1,44 @@
+// Colors
+$primaryColor: #191B1D;
+$secondaryColor: #121415;
+$tertiaryColor: #23262A;
+$tableColor: #50565A;
+$textColor: white;
+$textColorDark: #555555;
+$textColorSecondary: #8D8D8D;
+$textColorBright: #89030A;
+$scrollbarHover: #2f3338;
+
+// Custom Fonts
+@font-face {
+    font-family: 'Old London';
+    src: url('@/assets/oldLondon.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Bethany Elingston';
+    src: url('@/assets/BethanyElingston.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+// Typography
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&family=Roboto:ital,wght@0,100..900;1,100..900&family=Rubik:ital,wght@0,300..900;1,300..900&display=swap');
+$fontSizeSmall: 14px;
+$fontSizeNormal: 16px;
+$fontSizeMedium: 20px;
+$fontSizeBig: 24px;
+$fontSizeHuge: 32px;
+$fontSizeHuge2: 40px;
+$fontSizeHugest: 60px;
+$fontSizeGigantic: 150px;
+
+
+// Font families
+$fontFamilyOldLondon: 'Old London', serif;
+$fontFamilyBethany: 'Bethany Elingston', cursive;
+$fontFamilyRoboto: 'Roboto', sans-serif;
