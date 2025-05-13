@@ -3,14 +3,13 @@
 // Base styles
 html, #app {
   position: relative;
-  background-color: black;
+  background-color: $primaryColor;
   color: $textColor;
   margin: 0;
   padding: 0;
 }
 
 #app {
-  font-family: $fontFamilyBethany;
   font-size: $fontSizeNormal;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -18,7 +17,6 @@ html, #app {
 
 // Typography reset
 h1, h2, h3, p, a {
-  font-family: $fontFamilyBethany;
   margin: 0;
   padding: 0;
 }
@@ -26,14 +24,14 @@ h1, h2, h3, p, a {
 // Scrollbar styling
 ::-webkit-scrollbar {
   width: 10px;
-  background-color: $secondaryColor;
+  background-color: $scrollbarColorBackground;
 
   &-thumb {
-    background: $tertiaryColor;
+    background: $scrollbarColorThumb;
     border-radius: 10px;
 
     &:hover {
-      background: $scrollbarHover;
+      background: $scrollbarColorThumbHover;
     }
   }
 }

@@ -1,52 +1,334 @@
 <template>
   <div class="homeContainer">
+    <Header />
     <main>
+      <!-- Hero Section -->
       <section id="heroSection" aria-label="Hero">
-        <div class="backgroundGif" role="presentation"></div>
-        <h1 class="heroTitle">PokeClub</h1>
+        <div class="heroContent">
+          <h1 class="heroTitle">Bienvenue chez PokéClub</h1>
+          <h1 class="heroTitleEffect">Bienvenue chez PokéClub</h1>
+          <h2 class="heroSubtitle">Chope du Pokémon sans te ruiner ! Rejoins des fans et des développeurs qui partagent toutes les pépites !</h2>
+          <p class="heroDescription">Le groupe discord de PokéClub est fait pour toi, avec son Offre premium à seulement 5,99€/mois sans engagement : réassorts, sorties, actus exclusives et entraide entre fans — tout est réuni pour ne plus rien rater !</p>
+        </div>
+        <div class="arrowDown" @click="scrollToSection('avantages')">
+          <i class="fa-solid fa-arrow-down"></i>
+        </div>
       </section>
-      <section id="homeSection" aria-label="About">
+
+      <!-- Avantages Section -->
+      <section id="avantages" class="section">
+        <h2 class="sectionTitle">Avantages</h2>
+        <h2 class="sectionTitleEffect">Avantages</h2>
+        <div class="avantagesContainer">
+          <div class="avantagesImage">
+            <img src="@/assets/avantagesPicture.png" alt="Avantages background" />
+            <div class="avantageBox"
+              v-for="(avantage, index) in avantages"
+              :key="index"
+              :style="avantage.style"
+              :class="{ 'modern': avantage.look === 'modern', 'green': avantage.look === 'green' }">
+              <i :class="avantage.icon"></i>
+              <p class="avantageText">{{ avantage.text }}</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Offres Section -->
+      <section id="offres" class="section">
+        <h2 class="sectionTitle">NOS OFFRES</h2>
+        <h2 class="sectionTitleEffect">NOS OFFRES</h2>
+        <div class="offresContainer">
+          <div class="offreBox free">
+            <h3>Gratuit</h3>
+            <ul>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Accès aux sections gratuites de notre groupe Discord pour toujours</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Alertes avec délais sur les nouvelles sorties, réassort</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Actualités Pokémon centralisées : jeux, cartes, produits, événements</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Achat, vente et échange entre membres</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Une communauté active de passionnés comme toi !</li>
+            </ul>
+            <button class="joinButton">Rejoins le club Gratuit !</button>
+          </div>
+          <div class="offreBox premium">
+            <h3>Premium</h3>
+            <ul>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Alertes instantanées sans aucun délai — sois le premier à choper les bons plans !</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Accès exclusif au channel premium avec toutes les actu Pokémon en avant-première</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Support 24h/24, 7j/7 pour t'accompagner dans ta chasse ou tes achats</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Avantages spéciaux réservés aux membres premium</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Achat, vente et échange entre membres premium filtrés</li>
+              <li>
+                <i class="fa-solid fa-circle-check" style="margin-right: 10px;"></i> Et bien plus encore à découvrir en rejoignant le Club !</li>
+            </ul>
+            <h4>Prix 5,99€/mois seulement avec 7 jours d'essai gratuit !</h4>
+            <button class="joinButton premium">Rejoins le club premium !</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Succès Section -->
+      <section id="succes" class="section">
+        <h2 class="sectionTitle">SUCCÈS</h2>
+        <h2 class="sectionTitleEffect">SUCCÈS</h2>
+        <div class="succesImage">
+          <img src="@/assets/successPicture.png" alt="Succès" />
+        </div>
+      </section>
+
+      <!-- Avis Section -->
+      <section id="avis" class="section">
+        <h2 class="sectionTitle">Avis !</h2>
+        <h2 class="sectionTitleEffect">Avis !</h2>
+        <p class="sectionSubtitle">Ils en parlent mieux que nous : découvre les avis de la communauté !</p>
+        <div class="avisContainer">
+          <swiper
+            :modules="[SwiperNavigation, SwiperPagination]"
+            :slides-per-view="3"
+            :space-between="20"
+            :navigation="true"
+            :pagination="{
+              clickable: true,
+              el: '.swiper-pagination',
+              type: 'bullets'
+            }"
+            :breakpoints="{
+              320: {
+                slidesPerView: 1,
+                spaceBetween: 10
+              },
+              768: {
+                slidesPerView: 2,
+                spaceBetween: 15
+              },
+              1024: {
+                slidesPerView: 3,
+                spaceBetween: 20
+              }
+            }"
+            class="reviewsSwiper"
+          >
+            <swiper-slide v-for="(review, index) in reviews" :key="index">
+              <div class="reviewCard">
+                <div class="reviewCardHeader">
+                  <div class="reviewImage">
+                    <img :src="`/avatars/${review.avatar}`" :alt="review.name">
+                  </div>
+                  <h3 class="reviewName">{{ review.name }}</h3>
+                </div>
+                <p class="reviewText">{{ review.text }}</p>
+              </div>
+            </swiper-slide>
+          </swiper>
+        </div>
+      </section>
+
+      <!-- FAQ Section -->
+      <section id="faq" class="section">
+        <h2 class="sectionTitle">FAQ</h2>
+        <h2 class="sectionTitleEffect">FAQ</h2>
+        <div class="faqContainer">
+          <div v-for="(item, index) in faqItems" :key="index" class="faqItem" :class="{ 'open': item.isOpen }">
+            <div class="faqQuestion" @click="toggleFaq(index)">
+              <h3>{{ item.question }}</h3>
+              <button class="toggleButton" :aria-label="item.isOpen ? 'Fermer' : 'Ouvrir'">
+                <span class="toggleIcon"></span>
+              </button>
+            </div>
+            <div class="faqAnswer" v-show="item.isOpen">
+              <p>{{ item.answer }}</p>
+            </div>
+          </div>
+        </div>
       </section>
     </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footerContent">
+        <p class="copyright">© 2025 PokéClub</p>
+        <a href="/terms" class="terms">Terms & Condition</a>
+      </div>
+    </footer>
   </div>
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import Header from '@/components/Header/Header.vue'
+import { ref, computed } from 'vue'
+import { Swiper, SwiperSlide } from 'swiper/vue'
+import { Navigation as SwiperNavigation, Pagination as SwiperPagination } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
 
-// SEO meta tags
-onMounted(() => {
-  document.title = 'PokeClub'
-  updateMetaTags()
-})
+// Add Font Awesome CDN
+const fontAwesomeLink = document.createElement('link')
+fontAwesomeLink.rel = 'stylesheet'
+fontAwesomeLink.href = 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css'
+document.head.appendChild(fontAwesomeLink)
 
-const updateMetaTags = () => {
-  const meta = {
-    description: 'Welcome to PokeClub',
-    keywords: 'pokemon, club, community',
-    'og:title': 'PokeClub',
-    'og:description': 'Welcome to PokeClub',
-    'og:image': '/path-to-your-og-image.jpg',
-    'og:url': window.location.href,
-    'twitter:card': 'summary_large_image',
-    'twitter:title': 'PokeClub',
-    'twitter:description': 'Welcome to PokeClub',
-    'twitter:image': '/path-to-your-og-image.jpg'
+const scrollToSection = (sectionId) => {
+  const element = document.getElementById(sectionId)
+  if (element) {
+    const headerOffset = 80 // Height of the header
+    const elementPosition = element.getBoundingClientRect().top
+    const offsetPosition = elementPosition + window.pageYOffset - headerOffset
+
+    window.scrollTo({
+      top: offsetPosition,
+      behavior: 'smooth'
+    })
   }
-
-  Object.entries(meta).forEach(([name, content]) => {
-    let tag = document.querySelector(`meta[name="${name}"]`) ||
-              document.querySelector(`meta[property="${name}"]`)
-    if (!tag) {
-      tag = document.createElement('meta')
-      tag.setAttribute(name.startsWith('og:') ? 'property' : 'name', name)
-      document.head.appendChild(tag)
-    }
-    tag.setAttribute('content', content)
-  })
 }
+
+const avantages = [
+  { icon: "fa-solid fa-newspaper", text: "Actus Pokémon exclusives", style: { top: '10%', left: '-10%' }, look: "green" },
+  { icon: "fa-solid fa-box-open", text: "Neuf & occasion", style: { top: '0%', right: '22%' }, look: "green" },
+  { icon: "fa-solid fa-cart-shopping", text: "Achats, ventes et recherches centralisés", style: { top: '20%', right: '5%' }, look: "modern" },
+  { icon: "fa-solid fa-users", text: "Une équipe de développeurs passionnés", style: { top: '45%', left: '-15%' }, look: "modern" },
+  { icon: "fa-solid fa-mobile-screen-button", text: "Alertes ultra rapides sur mobile et Pc", style: { top: '50%', right: '8%' }, look: "green" },
+  { icon: "fa-solid fa-store", text: "Veille continue sur les boutiques spécialisées", style: { top: '80%', left: '-5%' }, look: "green" },
+  { icon: "fa-solid fa-coins", text: "Alertes sur le marché de l'occasion", style: { top: '90%', right: '18%' }, look: "modern" }
+]
+
+const faqItems = ref([
+  {
+    question: "Puis-je résilier quand je veux ?",
+    answer: "Oui, vous pouvez résilier votre abonnement à tout moment directement depuis votre espace client.",
+    isOpen: true
+  },
+  {
+    question: "Y a-t-il un engagement ?",
+    answer: "Non, l'abonnement est sans engagement. Vous êtes libre de rester aussi longtemps que vous le souhaitez !",
+    isOpen: true
+  },
+  {
+    question: "Que comprend l'abonnement à 5,99€ ?",
+    answer: "L'accès complet aux channels privés, alertes en temps réels, actus, marketplace premium …",
+    isOpen: true
+  },
+  {
+    question: "Comment puis-je accéder au contenu après mon achat ?",
+    answer: "Dès votre inscription, vous recevrez automatiquement vos accès sur notre serveur Discord.",
+    isOpen: true
+  },
+  {
+    question: "Comment contacter le support si j'ai un problème ?",
+    answer: "Vous pouvez nous contacter directement via le support Discord 24/24 et 7/7 !",
+    isOpen: true
+  },
+  {
+    question: "Pourquoi uniquement 5,99€/mois ?",
+    answer: "Nous avons voulu rendre PokéClub Premium accessible à tous les fans de Pokémon sans dépenser une fortune !",
+    isOpen: true
+  }
+])
+
+const toggleFaq = (index) => {
+  faqItems.value[index].isOpen = !faqItems.value[index].isOpen
+}
+
+const reviews = [
+  {
+    name: "Big-Planet26",
+    avatar: "big-planet26.jpg",
+    text: "Grâce à PokéClub, j'ai pu obtenir tous les coffrets que je voulais, sans rater une seule sortie. Entre les conseils des membres et les outils proposés, j'ai toujours été bien accompagné. Un grand merci à toute l'équipe PokéClub !"
+  },
+  {
+    name: "Atmos",
+    avatar: "atmos.jpg",
+    text: "Super serveur pour se retrouver entre passionnés Pokémon ! Le staff est disponible et très compétant pour vous aider à obtenir les items de vos rêves. Merci d'avoir crée cette communauté !"
+  },
+  {
+    name: "Saphism",
+    avatar: "saphism.jpg",
+    text: "Certainement le meilleur groupe pour les passionnés Pokémon ! Un staff super disponible et tres competent qui met a jour tous les outils nous permettant de facilement suivre l'acualité et obtenir les sorties les plus compliqués. Merci encore 🙏"
+  },
+  {
+    name: "elec",
+    avatar: "elec.jpg",
+    text: "Le meilleur serveur pour les collectionneurs de cartes Pokémon ! Un espace d'échange entre passionnés, avec de nombreux outils pratiques comme l'automatisation des annonces de stock. Parfait pour rester informé en temps réel des nouvelles sorties. Que vous cherchiez à enrichir votre collection ou simplement discuter avec d'autres passionnés, vous y trouverez votre place !"
+  },
+  {
+    name: "kmZ",
+    avatar: "kmz.jpg",
+    text: "Communauté incroyable ! Fait par des passionnés pour les passionnés. Grâce à Pokéclub tu obtiendras les coffrets et les cartes que tu cherches à des bons prix ! Merci Pokéclub 🏆"
+  },
+  {
+    name: "maximetrevet",
+    avatar: "maximetrevet.jpg",
+    text: "Superbe communauté avec de vrais passionnés qui donnent tout pour nous faire obtenir ce qu'on veut : les outils à dispos sont d'une qualité parfaite. Hâte de découvrir la suite avec la commu Pokeclub !"
+  },
+  {
+    name: "Damien Schutz",
+    avatar: "damien-schutz.jpg",
+    text: "Communauté très active, que des passionnés. L'Entraide est le mot d'ordre, il m'a jamais été aussi facile d'obtenir mes coffrets grâce aux outils performant mis à notre disposition. Merci Pokeclub ❤️"
+  },
+  {
+    name: "RedOctober",
+    avatar: "red-october.jpg",
+    text: "Meilleure commu pokemon française et de loin! Pokéclub m'a vraiment aidé à obtenir tous les coffrets que je voulais sans exception que ce soit grâce aux conseils des autres membres ou grâce aux outils mis à disposition. Merci encore Pokéclub!"
+  }
+]
 </script>
 
 <style scoped lang="scss">
 @use './Home.scss' as *;
+@use '@/variables.scss' as *;
+
+:deep(.swiper) {
+  padding: 10px 0;
+  padding-bottom: 50px;
+}
+
+:deep(.swiper-button-next),
+:deep(.swiper-button-prev) {
+  color: $textColorPop;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 193, 137, 0.6);
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+
+  &:after {
+    font-size: 18px;
+  }
+
+  &:hover:not(.swiper-button-disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: scale(1.1);
+  }
+
+  &.swiper-button-disabled {
+    opacity: 0.5;
+  }
+}
+
+:deep(.swiper-pagination) {
+  .swiper-pagination-bullet {
+    background: rgba(229, 193, 137, 0.3);
+    opacity: 1;
+
+    &:hover {
+      background: rgba(229, 193, 137, 0.5);
+    }
+  }
+
+  .swiper-pagination-bullet-active {
+    background: $textColorPop;
+  }
+}
 </style>
