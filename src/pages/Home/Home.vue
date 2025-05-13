@@ -2,7 +2,6 @@
   <div class="homeContainer">
     <Header />
     <main>
-      <!-- Hero Section -->
       <section id="heroSection" aria-label="Hero">
         <div class="heroContent">
           <h1 class="heroTitle">Bienvenue chez PokéClub</h1>
@@ -15,10 +14,11 @@
         </div>
       </section>
 
-      <!-- Avantages Section -->
       <section id="avantages" class="section">
-        <h2 class="sectionTitle">Avantages</h2>
-        <h2 class="sectionTitleEffect">Avantages</h2>
+        <div class="titleWrapper">
+          <h2 class="sectionTitle">Avantages</h2>
+          <h2 class="sectionTitleEffect">Avantages</h2>
+        </div>
         <div class="avantagesContainer">
           <div class="avantagesImage">
             <img src="@/assets/avantagesPicture.png" alt="Avantages background" />
@@ -34,10 +34,11 @@
         </div>
       </section>
 
-      <!-- Offres Section -->
       <section id="offres" class="section">
-        <h2 class="sectionTitle">NOS OFFRES</h2>
-        <h2 class="sectionTitleEffect">NOS OFFRES</h2>
+        <div class="titleWrapper">
+          <h2 class="sectionTitle">NOS OFFRES</h2>
+          <h2 class="sectionTitleEffect">NOS OFFRES</h2>
+        </div>
         <div class="offresContainer">
           <div class="offreBox free">
             <h3>Gratuit</h3>
@@ -77,19 +78,21 @@
         </div>
       </section>
 
-      <!-- Succès Section -->
       <section id="succes" class="section">
-        <h2 class="sectionTitle">SUCCÈS</h2>
-        <h2 class="sectionTitleEffect">SUCCÈS</h2>
+        <div class="titleWrapper">
+          <h2 class="sectionTitle">SUCCÈS</h2>
+          <h2 class="sectionTitleEffect">SUCCÈS</h2>
+        </div>
         <div class="succesImage">
           <img src="@/assets/successPicture.png" alt="Succès" />
         </div>
       </section>
 
-      <!-- Avis Section -->
       <section id="avis" class="section">
-        <h2 class="sectionTitle">Avis !</h2>
-        <h2 class="sectionTitleEffect">Avis !</h2>
+        <div class="titleWrapper">
+          <h2 class="sectionTitle">Avis !</h2>
+          <h2 class="sectionTitleEffect">Avis !</h2>
+        </div>
         <p class="sectionSubtitle">Ils en parlent mieux que nous : découvre les avis de la communauté !</p>
         <div class="avisContainer">
           <swiper
@@ -133,10 +136,11 @@
         </div>
       </section>
 
-      <!-- FAQ Section -->
       <section id="faq" class="section">
-        <h2 class="sectionTitle">FAQ</h2>
-        <h2 class="sectionTitleEffect">FAQ</h2>
+        <div class="titleWrapper">
+          <h2 class="sectionTitle">FAQ</h2>
+          <h2 class="sectionTitleEffect">FAQ</h2>
+        </div>
         <div class="faqContainer">
           <div v-for="(item, index) in faqItems" :key="index" class="faqItem" :class="{ 'open': item.isOpen }">
             <div class="faqQuestion" @click="toggleFaq(index)">
@@ -153,13 +157,41 @@
       </section>
     </main>
 
-    <!-- Footer -->
     <footer class="footer">
       <div class="footerContent">
         <p class="copyright">© 2025 PokéClub</p>
-        <a href="/terms" class="terms">Terms & Condition</a>
+        <a href="#" class="terms" @click.prevent="showTermsModal = true">Terms & Condition</a>
       </div>
     </footer>
+
+    <!-- Terms & Conditions Modal -->
+    <div v-if="showTermsModal" class="modal-overlay" @click="showTermsModal = false">
+      <div class="modal-content" @click.stop>
+        <div class="modal-header">
+          <h2>Terms & Conditions</h2>
+          <button class="close-button" @click="showTermsModal = false">
+            <i class="fa-solid fa-xmark"></i>
+          </button>
+        </div>
+        <div class="modal-body">
+          <h3>Éditeur du site</h3>
+          <p>Pseudo: Xzile</p>
+          <p>Adresse e-mail : pokeclub.communiction@gmail.com</p>
+
+          <h3>Hébergeur</h3>
+          <p>Hébergeur : [Nom de l'hébergeur]</p>
+          <p>Adresse : [Adresse de l'hébergeur]</p>
+          <p>Téléphone : [Numéro de téléphone de l'hébergeur]</p>
+          <p>Site Web : [URL de l'hébergeur]</p>
+
+          <h3>Propriété intellectuelle</h3>
+          <p>L'ensemble des contenus présents sur le site (textes, images, graphismes, logos, icônes, etc.) sont protégés par le droit de la propriété intellectuelle. Toute reproduction, distribution, modification ou adaptation, totale ou partielle, est interdite sans l'accord écrit préalable de l'éditeur.</p>
+
+          <h3>Limitations de responsabilité</h3>
+          <p>Le site ne saurait être tenu responsable des erreurs rencontrées sur le site, problèmes techniques, interprétation des informations publiées, ou conséquences de leur utilisation.</p>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -281,6 +313,8 @@ const reviews = [
     text: "Meilleure commu pokemon française et de loin! Pokéclub m'a vraiment aidé à obtenir tous les coffrets que je voulais sans exception que ce soit grâce aux conseils des autres membres ou grâce aux outils mis à disposition. Merci encore Pokéclub!"
   }
 ]
+
+const showTermsModal = ref(false)
 </script>
 
 <style scoped lang="scss">
@@ -290,6 +324,17 @@ const reviews = [
 :deep(.swiper) {
   padding: 10px 0;
   padding-bottom: 50px;
+  overflow: hidden;
+  width: 100%;
+}
+
+:deep(.swiper-wrapper) {
+  width: 100%;
+}
+
+:deep(.swiper-slide) {
+  width: 100%;
+  height: auto;
 }
 
 :deep(.swiper-button-next),
