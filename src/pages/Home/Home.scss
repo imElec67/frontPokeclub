@@ -86,7 +86,7 @@ main {
   position: relative;
   width: 100%;
   overflow: hidden;
-  margin-bottom: 48px;
+  margin-bottom: 0px;
 }
 
 .sectionTitle {
@@ -96,6 +96,7 @@ main {
   color: $textColorPop;
   position: relative;
   z-index: 2;
+  margin-bottom: 60px;
 }
 
 .sectionTitleEffect {
@@ -308,25 +309,96 @@ main {
   flex-direction: row;
   gap: 24px;
   text-align: left;
-  max-width: 1200px;
   margin: 0 auto;
+  margin-top: -100px;
+  position: relative;
+  z-index: 20;
+  padding: 40px 0;
+  padding-bottom: 0px;
+  background: linear-gradient(0deg, rgba(2, 5, 15, 0.9) 0%, rgba(2, 5, 15, 0.4) 50%, rgba(2, 5, 15, 0) 100%);
+  width: 100%;
+
+  .contentWrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: row;
+    gap: 24px;
+  }
 }
 
-.succesNumber {
+.blurOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(0deg, rgba($primaryColor, 0.8) 0%, rgba($primaryColor, 0.4) 50%, rgba($primaryColor, 0) 100%);
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.9;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba($primaryColor, 0.95) 0%, rgba($primaryColor, 0) 100%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(0deg, rgba($primaryColor, 0.6) 0%, rgba($primaryColor, 0) 100%);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+  }
+}
+
+.wrapperContent {
+  width: 400px;
+  text-align: left;
+}
+
+.succesContentTitle {
   font-family: $fontFamilyLuckiestGuy;
-  font-size: 72px;
-  color: $textColorPop;
-  margin: 0;
-  line-height: 1;
+  font-size: 150px;
+  text-align: left;
+  color: $textColor;
+  position: relative;
+  z-index: 2;
+}
+
+.succesContentTitleEffect {
+  font-family: $fontFamilyLuckiestGuy;
+  font-size: 150px;
+  text-align: left;
+  color: transparent;
+  -webkit-text-stroke: 1.5px $textColor;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(calc(-50% + 5px));
+  z-index: 1;
+  width: 100%;
+  pointer-events: none;
 }
 
 .succesText {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 8px;
 
   h4 {
-    font-family: $fontFamilyDMSans;
+    font-family: $fontFamilyLuckiestGuy;
     font-size: $fontSizeBig;
     color: $textColor;
     margin: 0;
@@ -345,6 +417,7 @@ main {
 // Footer
 .footer {
   padding: 32px;
+  padding-top: 0px;
   margin-top: 80px;
 }
 
@@ -368,11 +441,12 @@ main {
 
 // FAQ Section
 .faqContainer {
-  max-width: 800px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
 .faqItem {
+  width: 100%;
   background-color: rgba(255, 255, 255, 0.1);
   border-radius: 10px;
   margin-bottom: 16px;
@@ -432,13 +506,18 @@ main {
 }
 
 // Avis Section
+#avis{
+  padding-top: 0px;
+}
 .avisContainer {
   max-width: 1200px;
   margin: 0 auto;
   position: relative;
+  padding: 0 !important;
 }
 
 .reviewCard {
+  height: 100%;
   padding: 24px;
   background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);

@@ -94,13 +94,18 @@
           </div>
         </div>
         <div class="succesContent">
-          <div class="succesContentTitleWrapper">
-            <h3 class="succesContentTitle">+500</h3>
-            <h3 class="succesContentTitleEffect">+500</h3>
-          </div>
-          <div class="succesText">
-            <h4>Grâce à PokéClub, notre communauté a déjà profité de sorties exclusives, réassorts et ventes Pokémon.</h4>
-            <p>Qu'attends-tu pour nous rejoindre et ne plus jamais passer à côté ?</p>
+          <div class="blurOverlay"></div>
+          <div class="contentWrapper">
+            <div class="succesContentTitleWrapper">
+              <div class="titleWrapper wrapperContent">
+                <h3 class="succesContentTitle">+500</h3>
+                <h3 class="succesContentTitleEffect">+500</h3>
+              </div>
+            </div>
+            <div class="succesText">
+              <h4>Grâce à PokéClub, notre communauté a déjà profité de sorties exclusives, réassorts et ventes Pokémon.</h4>
+              <p>Qu'attends-tu pour nous rejoindre et ne plus jamais passer à côté ?</p>
+            </div>
           </div>
         </div>
       </section>
