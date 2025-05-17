@@ -218,6 +218,8 @@
 
           <h3>Limitations de responsabilité</h3>
           <p>Le site ne saurait être tenu responsable des erreurs rencontrées sur le site, problèmes techniques, interprétation des informations publiées, ou conséquences de leur utilisation.</p>
+
+          <h4>Website made by <a href="https://affluencestore.fr" target="_blank">Elec</a></h4>
         </div>
       </div>
     </div>

@@ -701,4 +701,17 @@ main {
     line-height: 1.4;
     font-size: $fontSizeNormal;
   }
+
+  h4 {
+    text-align: center;
+    font-size: $fontSizeNormal;
+    margin-top: 40px;
+    margin-bottom: 16px;
+  }
+
+  a {
+    color: $textColorPop;
+    text-decoration: none;
+    font-weight: bold;
+  }
 }
