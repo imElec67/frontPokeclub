@@ -266,19 +266,84 @@ main {
 }
 
 // Succès Section
+.succesContainer {
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.succesImages {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: center;
+  height: 300px;
+}
+
 .succesImage {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border: 1px solid $textColorPop;
+  box-shadow: 0px 0px 25px 0px rgba(229, 193, 137, 0.5);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  &:hover {
+    transform: scale(1.05);
+    z-index: 10 !important;
+  }
+}
+
+.succesContent {
+  display: flex;
+  flex-direction: row;
+  gap: 24px;
+  text-align: left;
   max-width: 1200px;
   margin: 0 auto;
+}
 
-  img {
-    width: 100%;
-    border-radius: 10px;
+.succesNumber {
+  font-family: $fontFamilyLuckiestGuy;
+  font-size: 72px;
+  color: $textColorPop;
+  margin: 0;
+  line-height: 1;
+}
+
+.succesText {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  h4 {
+    font-family: $fontFamilyDMSans;
+    font-size: $fontSizeBig;
+    color: $textColor;
+    margin: 0;
+    line-height: 1.4;
+  }
+
+  p {
+    font-family: $fontFamilyDMSans;
+    font-size: $fontSizeNormal;
+    color: $textColor;
+    margin: 0;
+    line-height: 1.4;
   }
 }
 
 // Footer
 .footer {
-  background-color: rgba(0, 0, 0, 0.3);
   padding: 32px;
   margin-top: 80px;
 }
@@ -375,20 +440,46 @@ main {
 
 .reviewCard {
   padding: 24px;
-  background-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border-radius: 10px;
   border: 1.5px solid rgba(229, 193, 137, 0.6);
-  box-shadow: 0px 0px 25px 0px rgba(229, 193, 137, 0.5);
+  box-shadow: 0px 0px 15px 0px rgba(229, 193, 137, 0.25);
   text-align: left;
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+}
 
-  &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0px 5px 30px 0px rgba(229, 193, 137, 0.6);
+.reviewImage {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 2px solid $textColorPop;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .fallbackAvatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(229, 193, 137, 0.2);
+    color: $textColorPop;
+    font-family: $fontFamilyLuckiestGuy;
+    font-size: 24px;
+    line-height: 1;
   }
 }
 
@@ -407,11 +498,28 @@ main {
   overflow: hidden;
   border: 2px solid $textColorPop;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
   img {
     width: 100%;
     height: 100%;
     object-fit: cover;
+  }
+
+  .fallbackAvatar {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(229, 193, 137, 0.2);
+    color: $textColorPop;
+    font-family: $fontFamilyLuckiestGuy;
+    font-size: 24px;
+    line-height: 1;
+    transform: translateY(1px);
   }
 }
 
@@ -439,57 +547,6 @@ main {
   word-break: break-word;
 }
 
-// Mobile Styles
-@media screen and (max-width: 768px) {
-  .heroTitle {
-    font-size: $fontSizeHugest;
-  }
-
-  .heroSubtitle {
-    font-size: $fontSizeHuge2;
-  }
-
-  .offresContainer {
-    flex-direction: column;
-  }
-
-  .avantageBox {
-    position: relative;
-    margin: 16px 0;
-    max-width: none;
-  }
-
-  .avantagesImage {
-    height: auto;
-  }
-
-  .faqQuestion h3 {
-    font-size: $fontSizeNormal;
-  }
-
-  .faqAnswer {
-    font-size: $fontSizeSmall;
-  }
-
-  .reviewCard {
-    height: auto;
-    min-height: 250px;
-    padding: 16px;
-  }
-
-  .reviewImage {
-    width: 50px;
-    height: 50px;
-  }
-
-  .reviewName {
-    font-size: $fontSizeNormal;
-  }
-
-  .reviewText {
-    font-size: $fontSizeSmall;
-  }
-}
 // MODAL
 
 .modal-overlay {
@@ -564,24 +621,5 @@ main {
     margin-bottom: 0px;
     line-height: 1.4;
     font-size: $fontSizeNormal;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  .modal-content {
-    width: 95%;
-    padding: 24px;
-  }
-
-  .modal-header h2 {
-    font-size: $fontSizeHuge2;
-  }
-
-  .modal-body h3 {
-    font-size: $fontSizeMedium;
-  }
-
-  .modal-body p {
-    font-size: $fontSizeSmall;
   }
 }

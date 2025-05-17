@@ -83,8 +83,25 @@
           <h2 class="sectionTitle">SUCCÈS</h2>
           <h2 class="sectionTitleEffect">SUCCÈS</h2>
         </div>
-        <div class="succesImage">
-          <img src="@/assets/successPicture.png" alt="Succès" />
+        <div class="succesContainer">
+          <div class="succesImages">
+            <img v-for="(image, index) in successImages"
+                 :key="index"
+                 :src="image.src"
+                 :alt="image.alt"
+                 :style="image.style"
+                 class="succesImage" />
+          </div>
+        </div>
+        <div class="succesContent">
+          <div class="succesContentTitleWrapper">
+            <h3 class="succesContentTitle">+500</h3>
+            <h3 class="succesContentTitleEffect">+500</h3>
+          </div>
+          <div class="succesText">
+            <h4>Grâce à PokéClub, notre communauté a déjà profité de sorties exclusives, réassorts et ventes Pokémon.</h4>
+            <p>Qu'attends-tu pour nous rejoindre et ne plus jamais passer à côté ?</p>
+          </div>
         </div>
       </section>
 
@@ -99,7 +116,10 @@
             :modules="[SwiperNavigation, SwiperPagination]"
             :slides-per-view="3"
             :space-between="20"
-            :navigation="true"
+            :navigation="{
+              nextEl: '.swiper-button-next',
+              prevEl: '.swiper-button-prev'
+            }"
             :pagination="{
               clickable: true,
               el: '.swiper-pagination',
@@ -125,13 +145,17 @@
               <div class="reviewCard">
                 <div class="reviewCardHeader">
                   <div class="reviewImage">
-                    <img :src="`/avatars/${review.avatar}`" :alt="review.name">
+                    <img v-if="review.avatar" :src="review.avatar" :alt="review.name">
+                    <div v-else class="fallbackAvatar">{{ review.name.charAt(0) }}</div>
                   </div>
                   <h3 class="reviewName">{{ review.name }}</h3>
                 </div>
                 <p class="reviewText">{{ review.text }}</p>
               </div>
             </swiper-slide>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination"></div>
           </swiper>
         </div>
       </section>
@@ -274,58 +298,94 @@ const toggleFaq = (index) => {
 const reviews = [
   {
     name: "Big-Planet26",
-    avatar: "big-planet26.jpg",
+    avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F414572650803888139%2F0afb582372ec7e59e1975ec1f707ad53",
     text: "Grâce à PokéClub, j'ai pu obtenir tous les coffrets que je voulais, sans rater une seule sortie. Entre les conseils des membres et les outils proposés, j'ai toujours été bien accompagné. Un grand merci à toute l'équipe PokéClub !"
   },
   {
     name: "Atmos",
-    avatar: "atmos.jpg",
+    avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F419604783461302273%2Fa_a3a1cf6a57a02e3e9f7267025cc0d993",
     text: "Super serveur pour se retrouver entre passionnés Pokémon ! Le staff est disponible et très compétant pour vous aider à obtenir les items de vos rêves. Merci d'avoir crée cette communauté !"
   },
   {
     name: "Saphism",
-    avatar: "saphism.jpg",
+    avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F283606683609989120%2Ff8e8eb3a2d94d91ab3883339a5e0fffb",
     text: "Certainement le meilleur groupe pour les passionnés Pokémon ! Un staff super disponible et tres competent qui met a jour tous les outils nous permettant de facilement suivre l'acualité et obtenir les sorties les plus compliqués. Merci encore 🙏"
   },
   {
     name: "elec",
-    avatar: "elec.jpg",
+    avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F529082579744194580%2Fa_7d10f91c6b2b2e24acae42ca3350af46",
     text: "Le meilleur serveur pour les collectionneurs de cartes Pokémon ! Un espace d'échange entre passionnés, avec de nombreux outils pratiques comme l'automatisation des annonces de stock. Parfait pour rester informé en temps réel des nouvelles sorties. Que vous cherchiez à enrichir votre collection ou simplement discuter avec d'autres passionnés, vous y trouverez votre place !"
   },
   {
     name: "kmZ",
-    avatar: "kmz.jpg",
+    avatar: "",
     text: "Communauté incroyable ! Fait par des passionnés pour les passionnés. Grâce à Pokéclub tu obtiendras les coffrets et les cartes que tu cherches à des bons prix ! Merci Pokéclub 🏆"
   },
   {
     name: "maximetrevet",
-    avatar: "maximetrevet.jpg",
+    avatar: "",
     text: "Superbe communauté avec de vrais passionnés qui donnent tout pour nous faire obtenir ce qu'on veut : les outils à dispos sont d'une qualité parfaite. Hâte de découvrir la suite avec la commu Pokeclub !"
   },
   {
-    name: "Damien Schutz",
-    avatar: "damien-schutz.jpg",
+    name: "Eren",
+    avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F1295361609065299968%2Fe2087f5edd381dbc16e427912d4892b7",
     text: "Communauté très active, que des passionnés. L'Entraide est le mot d'ordre, il m'a jamais été aussi facile d'obtenir mes coffrets grâce aux outils performant mis à notre disposition. Merci Pokeclub ❤️"
   },
   {
     name: "RedOctober",
-    avatar: "red-october.jpg",
+    avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F873839243024269332%2F06b4740b2ca0a206e2a06e22d876d965",
     text: "Meilleure commu pokemon française et de loin! Pokéclub m'a vraiment aidé à obtenir tous les coffrets que je voulais sans exception que ce soit grâce aux conseils des autres membres ou grâce aux outils mis à disposition. Merci encore Pokéclub!"
   }
 ]
 
 const showTermsModal = ref(false)
+
+const successImages = [
+  {
+    src: "/src/assets/successPicture1.jpg",
+    alt: "Succès 1",
+    style: { top: '3%', left: '0%', zIndex: 2 }
+  },
+  {
+    src: "/src/assets/successPicture2.jpg",
+    alt: "Succès 2",
+    style: { top: '0%', left: '230px', zIndex: 0 }
+  },
+  {
+    src: "/src/assets/successPicture3.jpg",
+    alt: "Succès 3",
+    style: { top: '4%', left: '460px', zIndex: 1 }
+  },
+  {
+    src: "/src/assets/successPicture4.jpg",
+    alt: "Succès 4",
+    style: { top: '2%', left: '680px', zIndex: 2 }
+  },
+  {
+    src: "/src/assets/successPicture5.jpg",
+    alt: "Succès 5",
+    style: { top: '0%', left: '900px', zIndex: 0 }
+  }
+]
 </script>
 
 <style scoped lang="scss">
 @use './Home.scss' as *;
 @use '@/variables.scss' as *;
 
+.avisContainer {
+  max-width: 1200px;
+  margin: 0 auto;
+  position: relative;
+  overflow: hidden;
+  padding: 0 50px;
+}
+
 :deep(.swiper) {
   padding: 10px 0;
   padding-bottom: 50px;
-  overflow: hidden;
   width: 100%;
+  position: relative;
 }
 
 :deep(.swiper-wrapper) {
@@ -347,6 +407,9 @@ const showTermsModal = ref(false)
   width: 40px;
   height: 40px;
   border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 100;
 
   &:after {
     font-size: 18px;
@@ -354,7 +417,7 @@ const showTermsModal = ref(false)
 
   &:hover:not(.swiper-button-disabled) {
     background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.1);
+    transform: translateY(-50%) scale(1.1);
   }
 
   &.swiper-button-disabled {
@@ -362,10 +425,28 @@ const showTermsModal = ref(false)
   }
 }
 
+:deep(.swiper-button-next) {
+  right: 0;
+}
+
+:deep(.swiper-button-prev) {
+  left: 0;
+}
+
 :deep(.swiper-pagination) {
+  position: relative;
+  bottom: 0;
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+
   .swiper-pagination-bullet {
+    width: 8px;
+    height: 8px;
     background: rgba(229, 193, 137, 0.3);
     opacity: 1;
+    margin: 0;
 
     &:hover {
       background: rgba(229, 193, 137, 0.5);
