@@ -3,6 +3,14 @@
     <Header />
     <main>
       <section id="heroSection" aria-label="Hero">
+        <div class="particlesContainer">
+          <span
+            v-for="n in particleCount"
+            :key="'hero-' + n"
+            class="particle"
+            ref="particlesRefsHero"
+          />
+        </div>
         <div class="heroContent">
           <h1 class="heroTitle">Bienvenue chez PokéClub</h1>
           <h1 class="heroTitleEffect">Bienvenue chez PokéClub</h1>
@@ -234,7 +242,7 @@
 
 <script setup>
 import Header from '@/components/Header/Header.vue'
-import { ref, computed } from 'vue'
+import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
 import { Swiper, SwiperSlide } from 'swiper/vue'
 import { Navigation as SwiperNavigation, Pagination as SwiperPagination } from 'swiper/modules'
 import 'swiper/css'
@@ -380,11 +388,116 @@ const successImages = [
     style: { top: '0%', left: '900px', zIndex: 0 }
   }
 ]
+
+const particleCount = 20
+const particlesRefsHero = ref([])
+let animationFrameId
+let velocitiesHero = []
+let isVisible = true
+
+function animateParticles(particles, velocities) {
+  if (!isVisible) return
+
+  particles.forEach((el, index) => {
+    if (!el || !el.parentElement) return
+
+    const container = el.parentElement.getBoundingClientRect()
+    // Skip animation if container is not visible
+    if (container.width === 0 || container.height === 0) return
+
+    const particleWidth = el.offsetWidth
+    const particleHeight = el.offsetHeight
+    const maxX = container.width - particleWidth
+    const maxY = container.height - particleHeight
+
+    if (!el.style.left || !el.style.top) {
+      el.style.left = `${Math.random() * maxX}px`
+      el.style.top = `${Math.random() * maxY}px`
+      const sizeMultiplier = 0.5 + Math.random() * 1.5
+      el.style.transform = `scale(${sizeMultiplier})`
+    }
+
+    let left = parseFloat(el.style.left)
+    let top = parseFloat(el.style.top)
+
+    left += velocities[index].x
+    top += velocities[index].y
+
+    if (left <= 0 || left >= maxX) {
+      velocities[index].x *= -1
+      left = Math.max(0, Math.min(left, maxX))
+    }
+
+    if (top <= 0 || top >= maxY) {
+      velocities[index].y *= -1
+      top = Math.max(0, Math.min(top, maxY))
+    }
+
+    el.style.left = `${left}px`
+    el.style.top = `${top}px`
+  })
+}
+
+const startAnimation = () => {
+  const baseSpeed = 1.5 / 5
+
+  velocitiesHero = Array.from({ length: particleCount }, () => ({
+    x: (Math.random() - 0.5) * baseSpeed,
+    y: (Math.random() - 0.5) * baseSpeed
+  }))
+
+  const animate = () => {
+    animateParticles(particlesRefsHero.value, velocitiesHero)
+    animationFrameId = requestAnimationFrame(animate)
+  }
+
+  animate()
+}
+
+// Add visibility change detection
+const handleVisibilityChange = () => {
+  isVisible = !document.hidden
+}
+
+onMounted(async () => {
+  document.addEventListener('visibilitychange', handleVisibilityChange)
+  await nextTick()
+  startAnimation()
+})
+
+onUnmounted(() => {
+  document.removeEventListener('visibilitychange', handleVisibilityChange)
+  cancelAnimationFrame(animationFrameId)
+})
 </script>
 
 <style scoped lang="scss">
 @use './Home.scss' as *;
 @use '@/variables.scss' as *;
+
+#heroSection {
+  .particlesContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+    border-radius: inherit;
+  }
+
+  .particle {
+    position: absolute;
+    width: 4.8px; // Reduced by 20% from 6px
+    height: 4.8px; // Reduced by 20% from 6px
+    background: $textColorPop;
+    border-radius: 50%;
+    opacity: 0.3;
+    z-index: 0;
+  }
+}
 
 .avisContainer {
   max-width: 1200px;
