@@ -74,6 +74,31 @@ main {
   align-items: center;
   justify-content: center;
   cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    border-color: $textColorPop;
+    
+    i {
+      color: $textColorPop;
+    }
+  }
+
+  i {
+    font-size: 24px;
+    color: $textColor;
+    transition: color 0.3s ease;
+    animation: dive 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes dive {
+  0%, 100% {
+    transform: translateY(5px);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
 }
 
 // Section Styles
