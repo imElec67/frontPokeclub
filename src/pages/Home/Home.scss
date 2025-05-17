@@ -20,11 +20,127 @@ main {
   text-align: center;
   flex-direction: column;
   padding: 32px;
+  position: relative;
+  overflow: visible;
+  min-height: 100vh;
+
+  .smoke {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: $textColorPop;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.08;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity, filter;
+    pointer-events: none;
+  }
+
+  .smoke1 {
+    animation: smoke1 15s linear infinite;
+  }
+
+  .smoke2 {
+    animation: smoke2 17s linear infinite;
+  }
+
+  .smoke3 {
+    animation: smoke3 19s linear infinite;
+  }
+}
+
+@keyframes smoke1 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg) scale(1);
+    opacity: 0.08;
+    filter: blur(80px);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(90deg) translateX(325px) rotate(-90deg) scale(1.1);
+    opacity: 0.15;
+    filter: blur(85px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) translateX(350px) rotate(-180deg) scale(1.2);
+    opacity: 0.12;
+    filter: blur(90px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(270deg) translateX(325px) rotate(-270deg) scale(1.1);
+    opacity: 0.18;
+    filter: blur(85px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg) scale(1);
+    opacity: 0.08;
+    filter: blur(80px);
+  }
+}
+
+@keyframes smoke2 {
+  0% {
+    transform: translate(-50%, -50%) rotate(120deg) translateX(400px) rotate(-120deg) scale(1.1);
+    opacity: 0.12;
+    filter: blur(80px);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(210deg) translateX(425px) rotate(-210deg) scale(1.15);
+    opacity: 0.18;
+    filter: blur(85px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(300deg) translateX(450px) rotate(-300deg) scale(1.2);
+    opacity: 0.15;
+    filter: blur(90px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(390deg) translateX(425px) rotate(-390deg) scale(1.15);
+    opacity: 0.22;
+    filter: blur(85px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(480deg) translateX(400px) rotate(-480deg) scale(1.1);
+    opacity: 0.12;
+    filter: blur(80px);
+  }
+}
+
+@keyframes smoke3 {
+  0% {
+    transform: translate(-50%, -50%) rotate(240deg) translateX(500px) rotate(-240deg) scale(0.9);
+    opacity: 0.1;
+    filter: blur(80px);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(330deg) translateX(525px) rotate(-330deg) scale(1);
+    opacity: 0.17;
+    filter: blur(85px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(420deg) translateX(550px) rotate(-420deg) scale(1.1);
+    opacity: 0.14;
+    filter: blur(90px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(510deg) translateX(525px) rotate(-510deg) scale(1);
+    opacity: 0.2;
+    filter: blur(85px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(600deg) translateX(500px) rotate(-600deg) scale(0.9);
+    opacity: 0.1;
+    filter: blur(80px);
+  }
 }
 
 .heroContent {
   max-width: 1200px;
   position: relative;
+  z-index: 1;
 }
 
 .heroTitle {
@@ -738,5 +854,123 @@ main {
     color: $textColorPop;
     text-decoration: none;
     font-weight: bold;
+  }
+}
+
+#offres {
+  position: relative;
+  overflow: visible;
+  min-height: 100vh;
+
+  .smoke {
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    background: $textColorPop;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.08;
+    z-index: 0;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    will-change: transform, opacity, filter;
+    pointer-events: none;
+  }
+
+  .smoke1 {
+    animation: smokeOffres1 20s linear infinite;
+  }
+
+  .smoke2 {
+    animation: smokeOffres2 22s linear infinite;
+  }
+
+  .smoke3 {
+    animation: smokeOffres3 24s linear infinite;
+  }
+}
+
+@keyframes smokeOffres1 {
+  0% {
+    transform: translate(-50%, -50%) rotate(0deg) translateX(250px) rotate(0deg) scale(1);
+    opacity: 0.08;
+    filter: blur(80px);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(90deg) translateX(275px) rotate(-90deg) scale(1.1);
+    opacity: 0.15;
+    filter: blur(85px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg) scale(1.2);
+    opacity: 0.12;
+    filter: blur(90px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(270deg) translateX(275px) rotate(-270deg) scale(1.1);
+    opacity: 0.18;
+    filter: blur(85px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg) translateX(250px) rotate(-360deg) scale(1);
+    opacity: 0.08;
+    filter: blur(80px);
+  }
+}
+
+@keyframes smokeOffres2 {
+  0% {
+    transform: translate(-50%, -50%) rotate(120deg) translateX(350px) rotate(-120deg) scale(1.1);
+    opacity: 0.12;
+    filter: blur(80px);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(210deg) translateX(375px) rotate(-210deg) scale(1.15);
+    opacity: 0.18;
+    filter: blur(85px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(300deg) translateX(400px) rotate(-300deg) scale(1.2);
+    opacity: 0.15;
+    filter: blur(90px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(390deg) translateX(375px) rotate(-390deg) scale(1.15);
+    opacity: 0.22;
+    filter: blur(85px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(480deg) translateX(350px) rotate(-480deg) scale(1.1);
+    opacity: 0.12;
+    filter: blur(80px);
+  }
+}
+
+@keyframes smokeOffres3 {
+  0% {
+    transform: translate(-50%, -50%) rotate(240deg) translateX(450px) rotate(-240deg) scale(0.9);
+    opacity: 0.1;
+    filter: blur(80px);
+  }
+  25% {
+    transform: translate(-50%, -50%) rotate(330deg) translateX(475px) rotate(-330deg) scale(1);
+    opacity: 0.17;
+    filter: blur(85px);
+  }
+  50% {
+    transform: translate(-50%, -50%) rotate(420deg) translateX(500px) rotate(-420deg) scale(1.1);
+    opacity: 0.14;
+    filter: blur(90px);
+  }
+  75% {
+    transform: translate(-50%, -50%) rotate(510deg) translateX(475px) rotate(-510deg) scale(1);
+    opacity: 0.2;
+    filter: blur(85px);
+  }
+  100% {
+    transform: translate(-50%, -50%) rotate(600deg) translateX(450px) rotate(-600deg) scale(0.9);
+    opacity: 0.1;
+    filter: blur(80px);
   }
 }

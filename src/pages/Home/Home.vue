@@ -12,6 +12,9 @@
         <div class="arrowDown" @click="scrollToSection('avantages')">
           <i class="fa-solid fa-arrow-down"></i>
         </div>
+        <div class="smoke smoke1"></div>
+        <div class="smoke smoke2"></div>
+        <div class="smoke smoke3"></div>
       </section>
 
       <section id="avantages" class="section">
@@ -76,6 +79,9 @@
             <button class="joinButton premium">Rejoins le club premium !</button>
           </div>
         </div>
+        <div class="smoke smoke1"></div>
+        <div class="smoke smoke2"></div>
+        <div class="smoke smoke3"></div>
       </section>
 
       <section id="succes" class="section">
