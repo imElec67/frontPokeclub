@@ -32,7 +32,9 @@
         </div>
         <div class="avantagesContainer">
           <div class="avantagesImage">
-            <img src="@/assets/avantagesPicture.png" alt="Avantages background" />
+            <img src="@/assets/phone1.png" alt="Avantages background" class="phone1Picture" />
+            <img src="@/assets/phone2.png" alt="Avantages background" class="phone2Picture" />
+            <img src="@/assets/phone3.png" alt="Avantages background" class="phone3Picture" />
             <div class="avantageBox"
               v-for="(avantage, index) in avantages"
               :key="index"
@@ -270,13 +272,13 @@ const scrollToSection = (sectionId) => {
 }
 
 const avantages = [
-  { icon: "fa-solid fa-newspaper", text: "Actus Pokémon exclusives", style: { top: '10%', left: '-10%' }, look: "green" },
-  { icon: "fa-solid fa-box-open", text: "Neuf & occasion", style: { top: '0%', right: '22%' }, look: "green" },
-  { icon: "fa-solid fa-cart-shopping", text: "Achats, ventes et recherches centralisés", style: { top: '20%', right: '5%' }, look: "modern" },
+  { icon: "fa-solid fa-newspaper", text: "Actus Pokémon exclusives", style: { top: '10%', left: '0%' }, look: "green" },
+  { icon: "fa-solid fa-box-open", text: "Neuf & occasion", style: { top: '0%', right: '12%' }, look: "green" },
+  { icon: "fa-solid fa-cart-shopping", text: "Achats, ventes et recherches centralisés", style: { top: '20%', right: '-5%' }, look: "modern" },
   { icon: "fa-solid fa-users", text: "Une équipe de développeurs passionnés", style: { top: '45%', left: '-15%' }, look: "modern" },
-  { icon: "fa-solid fa-mobile-screen-button", text: "Alertes ultra rapides sur mobile et Pc", style: { top: '50%', right: '8%' }, look: "green" },
+  { icon: "fa-solid fa-mobile-screen-button", text: "Alertes ultra rapides sur mobile et Pc", style: { top: '50%', right: '0%' }, look: "green" },
   { icon: "fa-solid fa-store", text: "Veille continue sur les boutiques spécialisées", style: { top: '80%', left: '-5%' }, look: "green" },
-  { icon: "fa-solid fa-coins", text: "Alertes sur le marché de l'occasion", style: { top: '90%', right: '18%' }, look: "modern" }
+  { icon: "fa-solid fa-coins", text: "Alertes sur le marché de l'occasion", style: { top: '90%', right: '8%' }, look: "modern" }
 ]
 
 const faqItems = ref([

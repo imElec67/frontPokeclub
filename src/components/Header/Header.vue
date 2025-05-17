@@ -205,7 +205,7 @@ onUnmounted(() => {
 
 .buttonContainer {
   position: relative;
-  width: 210px;
+  width: 250px;
   height: 100%;
   z-index: 1;
   display: flex;
@@ -263,7 +263,6 @@ onUnmounted(() => {
   background-color: rgba(114, 79, 24, 1);
   color: $textColor;
   font-family: $fontFamilyLuckiestGuy;
-  border: none;
   border: 1px solid $textColorPop;
   box-shadow: 0px 4px 4px 0px rgba(114, 79, 24, 0.29);
   border-radius: 27px;
@@ -274,7 +273,6 @@ onUnmounted(() => {
   transition: all 0.3s ease;
   line-height: 54px;
   text-align: center;
-  padding: 0;
   margin: auto;
   z-index: 1;
 
