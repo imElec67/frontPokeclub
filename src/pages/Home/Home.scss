@@ -696,10 +696,119 @@ main {
   padding-top: 0px;
 }
 .avisContainer {
-  max-width: 1200px;
+  max-width: 1300px;
   margin: 0 auto;
   position: relative;
   padding: 0 !important;
+}
+
+.reviewContent {
+  margin: 0 auto;
+}
+
+.reviewTitle {
+  font-weight: 300;
+  font-family: $fontFamilyLuckiestGuy;
+  font-size: $fontSizeHuge;
+  color: $textColorPop;
+  margin: 0;
+  text-align: center;
+  margin-bottom: 8px;
+}
+
+.reviewSubTitle {
+  font-family: $fontFamilyLuckiestGuy;
+  font-size: $fontSizeMedium;
+  text-align: center;
+  margin-bottom: 56px;
+  color: $textColor;
+}
+
+.carouselContainer {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 32px;
+  padding: 0;
+}
+
+.carouselContent {
+  flex: 1;
+  overflow: hidden;
+  position: relative;
+  min-height: 360px;
+}
+
+.carouselPage {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-rows: 1fr;
+  gap: 24px;
+  opacity: 0;
+  position: absolute;
+  width: 100%;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  padding: 16px;
+
+  &.active {
+    opacity: 1;
+    position: relative;
+    pointer-events: all;
+  }
+}
+
+.carouselArrow {
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(229, 193, 137, 0.6);
+  color: $textColorPop;
+  font-size: 24px;
+  cursor: pointer;
+  padding: 16px;
+  transition: transform 0.3s ease;
+  z-index: 2;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  &:hover {
+    transform: scale(1.1);
+    background: rgba(255, 255, 255, 0.2);
+  }
+}
+
+.carouselPagination {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.paginationDot {
+  width: 12px;
+  height: 12px;
+  padding: 0;
+  border-radius: 50%;
+  background-color: rgba($textColorPop, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &.active {
+    background-color: $textColorPop;
+  }
+  
+  &:hover {
+    background-color: rgba($textColorPop, 0.5);
+  }
 }
 
 .reviewCard {
@@ -715,6 +824,12 @@ main {
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  height: 320px;
+}
+
+.reviewHeader {
+  display: flex;
+  margin-bottom: 16px;
 }
 
 .reviewImage {
@@ -727,45 +842,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
-
-  img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-
-  .fallbackAvatar {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(229, 193, 137, 0.2);
-    color: $textColorPop;
-    font-family: $fontFamilyLuckiestGuy;
-    font-size: 24px;
-    line-height: 1;
-  }
-}
-
-.reviewCardHeader {
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.reviewImage {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  overflow: hidden;
-  border: 2px solid $textColorPop;
-  flex-shrink: 0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  margin-right: 20px;
 
   img {
     width: 100%;
@@ -799,17 +876,38 @@ main {
   text-overflow: ellipsis;
 }
 
+.reviewStars {
+  margin-top: 8px;
+  font-size: 18px;
+  display: flex;
+  gap: 4px;
+}
+
+.customStar {
+  color: $textColorPop;
+}
+
 .reviewText {
   font-family: $fontFamilyDMSans;
   font-size: $fontSizeNormal;
   line-height: 1.4;
   color: $textColor;
+  margin: 0;
+  margin-bottom: 16px;
   display: -webkit-box;
-  -webkit-line-clamp: 6;
+  -webkit-line-clamp: 4;
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-overflow: ellipsis;
   word-break: break-word;
+  flex: 1;
+}
+
+.reviewDate {
+  font-family: $fontFamilyDMSans;
+  font-size: $fontSizeSmall;
+  color: rgba($textColor, 0.7);
+  margin: 0;
 }
 
 // MODAL
@@ -905,7 +1003,6 @@ main {
 #offres {
   position: relative;
   overflow: visible;
-  min-height: 100vh;
 
   .smoke {
     position: absolute;
@@ -1017,5 +1114,40 @@ main {
     transform: translate(-50%, -50%) rotate(600deg) translateX(450px) rotate(-600deg) scale(0.9);
     opacity: 0.1;
     filter: blur(80px);
+  }
+}
+
+// Add media queries for responsive design
+@media (max-width: 1024px) {
+  .carouselPage {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  
+  .carouselContent {
+    min-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .carouselPage {
+    grid-template-columns: 1fr;
+  }
+  
+  .carouselContent {
+    min-height: 360px;
+  }
+  
+  .reviewCard {
+    height: 300px;
+  }
+  
+  .carouselContainer {
+    padding: 0;
+  }
+  
+  .carouselArrow {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
   }
 }

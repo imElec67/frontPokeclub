@@ -133,51 +133,46 @@
         </div>
         <p class="sectionSubtitle">Ils en parlent mieux que nous : découvre les avis de la communauté !</p>
         <div class="avisContainer">
-          <swiper
-            :modules="[SwiperNavigation, SwiperPagination]"
-            :slides-per-view="3"
-            :space-between="20"
-            :navigation="{
-              nextEl: '.swiper-button-next',
-              prevEl: '.swiper-button-prev'
-            }"
-            :pagination="{
-              clickable: true,
-              el: '.swiper-pagination',
-              type: 'bullets'
-            }"
-            :breakpoints="{
-              320: {
-                slidesPerView: 1,
-                spaceBetween: 10
-              },
-              768: {
-                slidesPerView: 2,
-                spaceBetween: 15
-              },
-              1024: {
-                slidesPerView: 3,
-                spaceBetween: 20
-              }
-            }"
-            class="reviewsSwiper"
-          >
-            <swiper-slide v-for="(review, index) in reviews" :key="index">
-              <div class="reviewCard">
-                <div class="reviewCardHeader">
-                  <div class="reviewImage">
-                    <img v-if="review.avatar" :src="review.avatar" :alt="review.name">
-                    <div v-else class="fallbackAvatar">{{ review.name.charAt(0) }}</div>
+          <div class="reviewContent">
+            <h2 class="reviewTitle">NOTE GLOBALE: <span class="boldStyle">4,9/5</span></h2>
+            <h3 class="reviewSubTitle">{{ reviews.length }} Reviews</h3>
+            <div class="carouselContainer">
+              <button class="carouselArrow carouselArrowLeft" @click="prevPage">
+                <i class="fa-solid fa-chevron-left"></i>
+              </button>
+              <div class="carouselContent">
+                <div class="carouselPage" v-for="(page, pageIndex) in reviewPages" :key="pageIndex"
+                     :class="{ active: currentPage === pageIndex }">
+                  <div class="reviewCard" v-for="(review, reviewIndex) in page" :key="reviewIndex">
+                    <div class="reviewHeader">
+                      <div class="reviewImage">
+                        <img v-if="review.avatar" :src="review.avatar" :alt="review.name">
+                        <div v-else class="fallbackAvatar">{{ review.name.charAt(0) }}</div>
+                      </div>
+                      <div>
+                        <h3 class="reviewName">{{ review.name }}</h3>
+                        <div class="reviewStars">
+                          <i class="fa-solid fa-star customStar" v-for="n in review.stars" :key="n"></i>
+                          <i class="fa-regular fa-star customStar" v-for="n in (5 - review.stars)" :key="'empty-' + n"></i>
+                        </div>
+                      </div>
+                    </div>
+                    <p class="reviewText">{{ review.text }}</p>
                   </div>
-                  <h3 class="reviewName">{{ review.name }}</h3>
                 </div>
-                <p class="reviewText">{{ review.text }}</p>
               </div>
-            </swiper-slide>
-            <div class="swiper-button-next"></div>
-            <div class="swiper-button-prev"></div>
-            <div class="swiper-pagination"></div>
-          </swiper>
+
+              <button class="carouselArrow carouselArrowRight" @click="nextPage">
+                <i class="fa-solid fa-chevron-right"></i>
+              </button>
+            </div>
+
+            <div class="carouselPagination">
+              <button v-for="(_, index) in reviewPages" :key="index" class="paginationDot"
+                      :class="{ active: currentPage === index }"
+                      @click="currentPage = index"></button>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -245,11 +240,6 @@
 <script setup>
 import Header from '@/components/Header/Header.vue'
 import { ref, computed, onMounted, onUnmounted, nextTick } from 'vue'
-import { Swiper, SwiperSlide } from 'swiper/vue'
-import { Navigation as SwiperNavigation, Pagination as SwiperPagination } from 'swiper/modules'
-import 'swiper/css'
-import 'swiper/css/navigation'
-import 'swiper/css/pagination'
 
 // Add Font Awesome CDN
 const fontAwesomeLink = document.createElement('link')
@@ -318,48 +308,85 @@ const toggleFaq = (index) => {
   faqItems.value[index].isOpen = !faqItems.value[index].isOpen
 }
 
+// Updated reviews data with star ratings
 const reviews = [
   {
     name: "Big-Planet26",
     avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F414572650803888139%2F0afb582372ec7e59e1975ec1f707ad53",
-    text: "Grâce à PokéClub, j'ai pu obtenir tous les coffrets que je voulais, sans rater une seule sortie. Entre les conseils des membres et les outils proposés, j'ai toujours été bien accompagné. Un grand merci à toute l'équipe PokéClub !"
+    text: "Grâce à PokéClub, j'ai pu obtenir tous les coffrets que je voulais, sans rater une seule sortie. Entre les conseils des membres et les outils proposés, j'ai toujours été bien accompagné. Un grand merci à toute l'équipe PokéClub !",
+    stars: 5,
   },
   {
     name: "Atmos",
     avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F419604783461302273%2Fa_a3a1cf6a57a02e3e9f7267025cc0d993",
-    text: "Super serveur pour se retrouver entre passionnés Pokémon ! Le staff est disponible et très compétant pour vous aider à obtenir les items de vos rêves. Merci d'avoir crée cette communauté !"
+    text: "Super serveur pour se retrouver entre passionnés Pokémon ! Le staff est disponible et très compétant pour vous aider à obtenir les items de vos rêves. Merci d'avoir crée cette communauté !",
+    stars: 5,
   },
   {
     name: "Saphism",
     avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F283606683609989120%2Ff8e8eb3a2d94d91ab3883339a5e0fffb",
-    text: "Certainement le meilleur groupe pour les passionnés Pokémon ! Un staff super disponible et tres competent qui met a jour tous les outils nous permettant de facilement suivre l'acualité et obtenir les sorties les plus compliqués. Merci encore 🙏"
+    text: "Certainement le meilleur groupe pour les passionnés Pokémon ! Un staff super disponible et tres competent qui met a jour tous les outils nous permettant de facilement suivre l'acualité et obtenir les sorties les plus compliqués. Merci encore 🙏",
+    stars: 5,
   },
   {
     name: "elec",
     avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F529082579744194580%2Fa_7d10f91c6b2b2e24acae42ca3350af46",
-    text: "Le meilleur serveur pour les collectionneurs de cartes Pokémon ! Un espace d'échange entre passionnés, avec de nombreux outils pratiques comme l'automatisation des annonces de stock. Parfait pour rester informé en temps réel des nouvelles sorties. Que vous cherchiez à enrichir votre collection ou simplement discuter avec d'autres passionnés, vous y trouverez votre place !"
+    text: "Le meilleur serveur pour les collectionneurs de cartes Pokémon ! Un espace d'échange entre passionnés, avec de nombreux outils pratiques comme l'automatisation des annonces de stock. Parfait pour rester informé en temps réel des nouvelles sorties.",
+    stars: 5,
   },
   {
     name: "kmZ",
     avatar: "",
-    text: "Communauté incroyable ! Fait par des passionnés pour les passionnés. Grâce à Pokéclub tu obtiendras les coffrets et les cartes que tu cherches à des bons prix ! Merci Pokéclub 🏆"
+    text: "Communauté incroyable ! Fait par des passionnés pour les passionnés. Grâce à Pokéclub tu obtiendras les coffrets et les cartes que tu cherches à des bons prix ! Merci Pokéclub 🏆",
+    stars: 4,
   },
   {
     name: "maximetrevet",
     avatar: "",
-    text: "Superbe communauté avec de vrais passionnés qui donnent tout pour nous faire obtenir ce qu'on veut : les outils à dispos sont d'une qualité parfaite. Hâte de découvrir la suite avec la commu Pokeclub !"
+    text: "Superbe communauté avec de vrais passionnés qui donnent tout pour nous faire obtenir ce qu'on veut : les outils à dispos sont d'une qualité parfaite. Hâte de découvrir la suite avec la commu Pokeclub !",
+    stars: 5,
   },
   {
     name: "Eren",
     avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F1295361609065299968%2Fe2087f5edd381dbc16e427912d4892b7",
-    text: "Communauté très active, que des passionnés. L'Entraide est le mot d'ordre, il m'a jamais été aussi facile d'obtenir mes coffrets grâce aux outils performant mis à notre disposition. Merci Pokeclub ❤️"
+    text: "Communauté très active, que des passionnés. L'Entraide est le mot d'ordre, il m'a jamais été aussi facile d'obtenir mes coffrets grâce aux outils performant mis à notre disposition. Merci Pokeclub ❤️",
+    stars: 5,
   },
   {
     name: "RedOctober",
     avatar: "https://img-v2-prod.whop.com/unsafe/rs:fit:96:0/plain/https%3A%2F%2Fcdn.discordapp.com%2Favatars%2F873839243024269332%2F06b4740b2ca0a206e2a06e22d876d965",
-    text: "Meilleure commu pokemon française et de loin! Pokéclub m'a vraiment aidé à obtenir tous les coffrets que je voulais sans exception que ce soit grâce aux conseils des autres membres ou grâce aux outils mis à disposition. Merci encore Pokéclub!"
+    text: "Meilleure commu pokemon française et de loin! Pokéclub m'a vraiment aidé à obtenir tous les coffrets que je voulais sans exception que ce soit grâce aux conseils des autres membres ou grâce aux outils mis à disposition. Merci encore Pokéclub!",
+    stars: 5,
   }
 ]
+
+// Carousel pagination
+const currentPage = ref(0)
+
+// Split reviews into pages of 3
+const reviewPages = computed(() => {
+  const pages = []
+  for (let i = 0; i < reviews.length; i += 3) {
+    pages.push(reviews.slice(i, i + 3))
+  }
+  return pages
+})
+
+const nextPage = () => {
+  if (currentPage.value < reviewPages.value.length - 1) {
+    currentPage.value++
+  } else {
+    currentPage.value = 0
+  }
+}
+
+const prevPage = () => {
+  if (currentPage.value > 0) {
+    currentPage.value--
+  } else {
+    currentPage.value = reviewPages.value.length - 1
+  }
+}
 
 const showTermsModal = ref(false)
 
@@ -501,88 +528,7 @@ onUnmounted(() => {
   }
 }
 
-.avisContainer {
-  max-width: 1200px;
-  margin: 0 auto;
-  position: relative;
-  overflow: hidden;
-  padding: 0 50px;
-}
-
-:deep(.swiper) {
-  padding: 10px 0;
-  padding-bottom: 50px;
-  width: 100%;
-  position: relative;
-}
-
-:deep(.swiper-wrapper) {
-  width: 100%;
-}
-
-:deep(.swiper-slide) {
-  width: 100%;
-  height: auto;
-}
-
-:deep(.swiper-button-next),
-:deep(.swiper-button-prev) {
-  color: $textColorPop;
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(229, 193, 137, 0.6);
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  top: 50%;
-  transform: translateY(-50%);
-  z-index: 100;
-
-  &:after {
-    font-size: 18px;
-  }
-
-  &:hover:not(.swiper-button-disabled) {
-    background: rgba(255, 255, 255, 0.2);
-    transform: translateY(-50%) scale(1.1);
-  }
-
-  &.swiper-button-disabled {
-    opacity: 0.5;
-  }
-}
-
-:deep(.swiper-button-next) {
-  right: 0;
-}
-
-:deep(.swiper-button-prev) {
-  left: 0;
-}
-
-:deep(.swiper-pagination) {
-  position: relative;
-  bottom: 0;
-  margin-top: 20px;
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-
-  .swiper-pagination-bullet {
-    width: 8px;
-    height: 8px;
-    background: rgba(229, 193, 137, 0.3);
-    opacity: 1;
-    margin: 0;
-
-    &:hover {
-      background: rgba(229, 193, 137, 0.5);
-    }
-  }
-
-  .swiper-pagination-bullet-active {
-    background: $textColorPop;
-  }
+.boldStyle {
+  font-weight: 900;
 }
 </style>
