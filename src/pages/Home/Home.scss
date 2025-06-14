@@ -3,13 +3,26 @@
 
 
 .homeContainer {
-  min-height: 100vh;
   background-color: $primaryColor;
   color: $textColor;
+  contain: layout style;
+  width: 100%;
+  min-width: 100vw;
+  box-sizing: border-box;
 }
 
 main {
   padding-top: 80px; // Header height
+  width: 100%;
+  contain: layout;
+  
+  @media (max-width: 768px) {
+    padding-top: 100px; // Adjusted for mobile header height
+  }
+  
+  @media (max-width: 480px) {
+    padding-top: 80px; // Adjusted for smaller mobile header height
+  }
 }
 
 // Hero Section
@@ -21,126 +34,157 @@ main {
   flex-direction: column;
   padding: 32px;
   position: relative;
-  overflow: visible;
-  min-height: 100vh;
+  contain: layout style;
+  isolation: isolate;
 
   .smoke {
     position: absolute;
-    width: 600px;
-    height: 600px;
+    width: 500px;
+    height: 500px;
     background: $textColorPop;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.08;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    will-change: transform, opacity, filter;
+    z-index: 1;
+    will-change: transform;
     pointer-events: none;
+    contain: strict;
+    transform-origin: center center;
   }
 
   .smoke1 {
+    filter: blur(60px);
+    opacity: 0.25;
+    top: 30%;
+    left: 20%;
     animation: smoke1 15s linear infinite;
+    transform: translateZ(0);
   }
 
   .smoke2 {
+    filter: blur(80px);
+    opacity: 0.22;
+    top: 60%;
+    right: 15%;
+    width: 600px;
+    height: 600px;
     animation: smoke2 17s linear infinite;
+    transform: translateZ(0);
   }
 
   .smoke3 {
+    filter: blur(70px);
+    opacity: 0.28;
+    top: 20%;
+    right: 25%;
+    width: 400px;
+    height: 400px;
     animation: smoke3 19s linear infinite;
+    transform: translateZ(0);
   }
 }
 
 @keyframes smoke1 {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(300px) rotate(0deg) scale(1);
-    opacity: 0.08;
-    filter: blur(80px);
+    transform: rotate(0deg) translateX(100px) rotate(0deg) scale(1.2);
+    opacity: 0.25;
+    filter: blur(60px);
   }
-  25% {
-    transform: translate(-50%, -50%) rotate(90deg) translateX(325px) rotate(-90deg) scale(1.1);
-    opacity: 0.15;
-    filter: blur(85px);
+  15% {
+    transform: rotate(54deg) translateX(120px) rotate(-54deg) scale(0.9);
+    opacity: 0.32;
+    filter: blur(65px);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(180deg) translateX(350px) rotate(-180deg) scale(1.2);
-    opacity: 0.12;
-    filter: blur(90px);
+  35% {
+    transform: rotate(126deg) translateX(140px) rotate(-126deg) scale(1.4);
+    opacity: 0.28;
+    filter: blur(70px);
   }
-  75% {
-    transform: translate(-50%, -50%) rotate(270deg) translateX(325px) rotate(-270deg) scale(1.1);
-    opacity: 0.18;
-    filter: blur(85px);
+  60% {
+    transform: rotate(216deg) translateX(120px) rotate(-216deg) scale(1.0);
+    opacity: 0.35;
+    filter: blur(65px);
+  }
+  85% {
+    transform: rotate(306deg) translateX(110px) rotate(-306deg) scale(1.3);
+    opacity: 0.30;
+    filter: blur(62px);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg) translateX(300px) rotate(-360deg) scale(1);
-    opacity: 0.08;
-    filter: blur(80px);
+    transform: rotate(360deg) translateX(100px) rotate(-360deg) scale(1.2);
+    opacity: 0.25;
+    filter: blur(60px);
   }
 }
 
 @keyframes smoke2 {
   0% {
-    transform: translate(-50%, -50%) rotate(120deg) translateX(400px) rotate(-120deg) scale(1.1);
-    opacity: 0.12;
+    transform: rotate(60deg) translateX(80px) rotate(-60deg) scale(0.8);
+    opacity: 0.22;
     filter: blur(80px);
   }
-  25% {
-    transform: translate(-50%, -50%) rotate(210deg) translateX(425px) rotate(-210deg) scale(1.15);
-    opacity: 0.18;
+  20% {
+    transform: rotate(132deg) translateX(100px) rotate(-132deg) scale(1.5);
+    opacity: 0.28;
     filter: blur(85px);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(300deg) translateX(450px) rotate(-300deg) scale(1.2);
-    opacity: 0.15;
+  40% {
+    transform: rotate(204deg) translateX(120px) rotate(-204deg) scale(1.1);
+    opacity: 0.25;
     filter: blur(90px);
   }
-  75% {
-    transform: translate(-50%, -50%) rotate(390deg) translateX(425px) rotate(-390deg) scale(1.15);
-    opacity: 0.22;
+  65% {
+    transform: rotate(294deg) translateX(100px) rotate(-294deg) scale(1.3);
+    opacity: 0.30;
     filter: blur(85px);
   }
+  90% {
+    transform: rotate(378deg) translateX(90px) rotate(-378deg) scale(0.9);
+    opacity: 0.26;
+    filter: blur(82px);
+  }
   100% {
-    transform: translate(-50%, -50%) rotate(480deg) translateX(400px) rotate(-480deg) scale(1.1);
-    opacity: 0.12;
+    transform: rotate(420deg) translateX(80px) rotate(-420deg) scale(0.8);
+    opacity: 0.22;
     filter: blur(80px);
   }
 }
 
 @keyframes smoke3 {
   0% {
-    transform: translate(-50%, -50%) rotate(240deg) translateX(500px) rotate(-240deg) scale(0.9);
-    opacity: 0.1;
-    filter: blur(80px);
+    transform: rotate(180deg) translateX(60px) rotate(-180deg) scale(1.0);
+    opacity: 0.28;
+    filter: blur(70px);
   }
   25% {
-    transform: translate(-50%, -50%) rotate(330deg) translateX(525px) rotate(-330deg) scale(1);
-    opacity: 0.17;
-    filter: blur(85px);
+    transform: rotate(270deg) translateX(80px) rotate(-270deg) scale(0.7);
+    opacity: 0.35;
+    filter: blur(75px);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(420deg) translateX(550px) rotate(-420deg) scale(1.1);
-    opacity: 0.14;
-    filter: blur(90px);
+  45% {
+    transform: rotate(342deg) translateX(100px) rotate(-342deg) scale(1.3);
+    opacity: 0.30;
+    filter: blur(80px);
   }
-  75% {
-    transform: translate(-50%, -50%) rotate(510deg) translateX(525px) rotate(-510deg) scale(1);
-    opacity: 0.2;
-    filter: blur(85px);
+  70% {
+    transform: rotate(432deg) translateX(80px) rotate(-432deg) scale(1.5);
+    opacity: 0.38;
+    filter: blur(75px);
+  }
+  95% {
+    transform: rotate(513deg) translateX(70px) rotate(-513deg) scale(0.8);
+    opacity: 0.32;
+    filter: blur(72px);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(600deg) translateX(500px) rotate(-600deg) scale(0.9);
-    opacity: 0.1;
-    filter: blur(80px);
+    transform: rotate(540deg) translateX(60px) rotate(-540deg) scale(1.0);
+    opacity: 0.28;
+    filter: blur(70px);
   }
 }
 
 .heroContent {
   max-width: 1200px;
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .heroTitle {
@@ -191,6 +235,8 @@ main {
   justify-content: center;
   cursor: pointer;
   transition: all 0.3s ease;
+  position: relative;
+  z-index: 10;
 
   &:hover {
     border-color: $textColorPop;
@@ -228,6 +274,7 @@ main {
   width: 100%;
   overflow: hidden;
   margin-bottom: 0px;
+  z-index: 10;
 }
 
 .sectionTitle {
@@ -376,6 +423,8 @@ main {
   gap: 32px;
   max-width: 1200px;
   margin: 0 auto;
+  position: relative;
+  z-index: 10;
 }
 
 .offreBox {
@@ -642,6 +691,11 @@ main {
   &:hover {
     background-color: rgba(255, 255, 255, 0.15);
   }
+  
+  &.open {
+    background-color: rgba(255, 255, 255, 0.15);
+    box-shadow: 0 5px 15px rgba(229, 193, 137, 0.15);
+  }
 }
 
 .faqQuestion {
@@ -650,13 +704,19 @@ main {
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
+  transition: all 0.3s ease;
 
   h3 {
     font-family: $fontFamilyDMSans;
     font-size: $fontSizeBig;
     margin: 0;
     color: $textColor;
+    transition: all 0.3s ease;
   }
+}
+
+.faqItem.open .faqQuestion h3 {
+  color: $textColorPop;
 }
 
 .toggleButton {
@@ -667,6 +727,7 @@ main {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: all 0.3s ease;
 }
 
 .toggleIcon {
@@ -684,11 +745,18 @@ main {
 }
 
 .faqAnswer {
-  padding: 0 24px 24px;
-  font-family: $fontFamilyDMSans;
-  font-size: $fontSizeNormal;
-  color: $textColor;
-  line-height: 1.6;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.4s ease;
+
+  p {
+    padding: 0 24px 24px;
+    margin: 0;
+    font-family: $fontFamilyDMSans;
+    font-size: $fontSizeNormal;
+    color: $textColor;
+    line-height: 1.6;
+  }
 }
 
 // Avis Section
@@ -932,7 +1000,6 @@ main {
   border-radius: 10px;
   width: 90%;
   max-width: 800px;
-  max-height: 90vh;
   overflow-y: auto;
   padding: 32px;
   position: relative;
@@ -1002,123 +1069,191 @@ main {
 
 #offres {
   position: relative;
-  overflow: visible;
+  contain: layout style;
+  isolation: isolate;
 
   .smoke {
     position: absolute;
-    width: 600px;
-    height: 600px;
     background: $textColorPop;
     border-radius: 50%;
-    filter: blur(80px);
-    opacity: 0.08;
-    z-index: 0;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    will-change: transform, opacity, filter;
+    z-index: 1;
+    will-change: transform;
     pointer-events: none;
+    contain: strict;
+    transform-origin: center center;
   }
 
   .smoke1 {
+    width: 400px;
+    height: 400px;
+    filter: blur(55px);
+    opacity: 0.24;
+    top: 25%;
+    left: 10%;
     animation: smokeOffres1 20s linear infinite;
+    transform: translateZ(0);
   }
 
   .smoke2 {
+    width: 550px;
+    height: 550px;
+    filter: blur(75px);
+    opacity: 0.21;
+    top: 70%;
+    right: 8%;
     animation: smokeOffres2 22s linear infinite;
+    transform: translateZ(0);
   }
 
   .smoke3 {
+    width: 350px;
+    height: 350px;
+    filter: blur(65px);
+    opacity: 0.26;
+    top: 40%;
+    right: 30%;
     animation: smokeOffres3 24s linear infinite;
+    transform: translateZ(0);
   }
 }
 
 @keyframes smokeOffres1 {
   0% {
-    transform: translate(-50%, -50%) rotate(0deg) translateX(250px) rotate(0deg) scale(1);
-    opacity: 0.08;
-    filter: blur(80px);
+    transform: rotate(45deg) translateX(70px) rotate(-45deg) scale(0.9);
+    opacity: 0.24;
+    filter: blur(55px);
   }
-  25% {
-    transform: translate(-50%, -50%) rotate(90deg) translateX(275px) rotate(-90deg) scale(1.1);
-    opacity: 0.15;
-    filter: blur(85px);
+  30% {
+    transform: rotate(153deg) translateX(90px) rotate(-153deg) scale(1.4);
+    opacity: 0.30;
+    filter: blur(60px);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(180deg) translateX(300px) rotate(-180deg) scale(1.2);
-    opacity: 0.12;
-    filter: blur(90px);
+  55% {
+    transform: rotate(243deg) translateX(110px) rotate(-243deg) scale(0.8);
+    opacity: 0.26;
+    filter: blur(65px);
   }
-  75% {
-    transform: translate(-50%, -50%) rotate(270deg) translateX(275px) rotate(-270deg) scale(1.1);
-    opacity: 0.18;
-    filter: blur(85px);
+  80% {
+    transform: rotate(333deg) translateX(90px) rotate(-333deg) scale(1.2);
+    opacity: 0.33;
+    filter: blur(60px);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(360deg) translateX(250px) rotate(-360deg) scale(1);
-    opacity: 0.08;
-    filter: blur(80px);
+    transform: rotate(405deg) translateX(70px) rotate(-405deg) scale(0.9);
+    opacity: 0.24;
+    filter: blur(55px);
   }
 }
 
 @keyframes smokeOffres2 {
   0% {
-    transform: translate(-50%, -50%) rotate(120deg) translateX(350px) rotate(-120deg) scale(1.1);
-    opacity: 0.12;
+    transform: rotate(90deg) translateX(60px) rotate(-90deg) scale(1.3);
+    opacity: 0.21;
+    filter: blur(75px);
+  }
+  18% {
+    transform: rotate(154deg) translateX(80px) rotate(-154deg) scale(0.9);
+    opacity: 0.27;
     filter: blur(80px);
   }
-  25% {
-    transform: translate(-50%, -50%) rotate(210deg) translateX(375px) rotate(-210deg) scale(1.15);
-    opacity: 0.18;
+  42% {
+    transform: rotate(230deg) translateX(100px) rotate(-230deg) scale(1.6);
+    opacity: 0.23;
     filter: blur(85px);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(300deg) translateX(400px) rotate(-300deg) scale(1.2);
-    opacity: 0.15;
-    filter: blur(90px);
+  68% {
+    transform: rotate(320deg) translateX(80px) rotate(-320deg) scale(1.0);
+    opacity: 0.29;
+    filter: blur(80px);
   }
-  75% {
-    transform: translate(-50%, -50%) rotate(390deg) translateX(375px) rotate(-390deg) scale(1.15);
-    opacity: 0.22;
-    filter: blur(85px);
+  88% {
+    transform: rotate(396deg) translateX(70px) rotate(-396deg) scale(1.4);
+    opacity: 0.25;
+    filter: blur(77px);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(480deg) translateX(350px) rotate(-480deg) scale(1.1);
-    opacity: 0.12;
-    filter: blur(80px);
+    transform: rotate(450deg) translateX(60px) rotate(-450deg) scale(1.3);
+    opacity: 0.21;
+    filter: blur(75px);
   }
 }
 
 @keyframes smokeOffres3 {
   0% {
-    transform: translate(-50%, -50%) rotate(240deg) translateX(450px) rotate(-240deg) scale(0.9);
-    opacity: 0.1;
-    filter: blur(80px);
+    transform: rotate(135deg) translateX(50px) rotate(-135deg) scale(1.1);
+    opacity: 0.26;
+    filter: blur(65px);
   }
-  25% {
-    transform: translate(-50%, -50%) rotate(330deg) translateX(475px) rotate(-330deg) scale(1);
-    opacity: 0.17;
-    filter: blur(85px);
+  22% {
+    transform: rotate(207deg) translateX(70px) rotate(-207deg) scale(0.7);
+    opacity: 0.34;
+    filter: blur(70px);
   }
-  50% {
-    transform: translate(-50%, -50%) rotate(420deg) translateX(500px) rotate(-420deg) scale(1.1);
-    opacity: 0.14;
-    filter: blur(90px);
+  48% {
+    transform: rotate(291deg) translateX(90px) rotate(-291deg) scale(1.4);
+    opacity: 0.29;
+    filter: blur(75px);
   }
   75% {
-    transform: translate(-50%, -50%) rotate(510deg) translateX(475px) rotate(-510deg) scale(1);
-    opacity: 0.2;
-    filter: blur(85px);
+    transform: rotate(378deg) translateX(70px) rotate(-378deg) scale(0.9);
+    opacity: 0.37;
+    filter: blur(70px);
+  }
+  92% {
+    transform: rotate(459deg) translateX(55px) rotate(-459deg) scale(1.3);
+    opacity: 0.31;
+    filter: blur(67px);
   }
   100% {
-    transform: translate(-50%, -50%) rotate(600deg) translateX(450px) rotate(-600deg) scale(0.9);
-    opacity: 0.1;
-    filter: blur(80px);
+    transform: rotate(495deg) translateX(50px) rotate(-495deg) scale(1.1);
+    opacity: 0.26;
+    filter: blur(65px);
   }
 }
 
 // Add media queries for responsive design
 @media (max-width: 1024px) {
+  // Smoke responsive sizes for tablet
+  #heroSection {
+    .smoke1 {
+      width: 400px;
+      height: 400px;
+      filter: blur(50px);
+    }
+
+    .smoke2 {
+      width: 500px;
+      height: 500px;
+      filter: blur(65px);
+    }
+
+    .smoke3 {
+      width: 320px;
+      height: 320px;
+      filter: blur(55px);
+    }
+  }
+
+  #offres {
+    .smoke1 {
+      width: 320px;
+      height: 320px;
+      filter: blur(45px);
+    }
+
+    .smoke2 {
+      width: 450px;
+      height: 450px;
+      filter: blur(60px);
+    }
+
+    .smoke3 {
+      width: 280px;
+      height: 280px;
+      filter: blur(50px);
+    }
+  }
+
   .carouselPage {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -1126,9 +1261,109 @@ main {
   .carouselContent {
     min-height: 400px;
   }
+  
+  // Avantages optimizations for tablet
+  .avantagesImage {
+    img {
+      height: 600px;
+    }
+  }
+  
+  .phone1Picture {
+    transform: translateX(30px) rotate(-8deg);
+  }
+  
+  .phone3Picture {
+    transform: translateX(-30px) rotate(8deg);
+  }
+  
+  .avantageBox {
+    min-width: 180px;
+    padding: 20px;
+    font-size: $fontSizeSmall;
+    
+    i {
+      font-size: 20px;
+    }
+  }
+  
+  // Success section optimization
+  .succesImages {
+    height: 250px;
+  }
+  
+  .succesImage {
+    width: 250px;
+    height: 250px;
+  }
+  
+  .successImages img {
+    &:nth-child(1) {
+      left: 0%;
+    }
+    &:nth-child(2) {
+      left: 180px;
+    }
+    &:nth-child(3) {
+      left: 360px;
+    }
+    &:nth-child(4) {
+      left: 540px;
+    }
+    &:nth-child(5) {
+      left: 720px;
+    }
+  }
 }
 
 @media (max-width: 768px) {
+  // Smoke responsive sizes for mobile
+  #heroSection {
+    .smoke1 {
+      width: 300px;
+      height: 300px;
+      filter: blur(40px);
+      opacity: 0.20;
+    }
+
+    .smoke2 {
+      width: 380px;
+      height: 380px;
+      filter: blur(55px);
+      opacity: 0.18;
+    }
+
+    .smoke3 {
+      width: 250px;
+      height: 250px;
+      filter: blur(45px);
+      opacity: 0.22;
+    }
+  }
+
+  #offres {
+    .smoke1 {
+      width: 250px;
+      height: 250px;
+      filter: blur(35px);
+      opacity: 0.20;
+    }
+
+    .smoke2 {
+      width: 320px;
+      height: 320px;
+      filter: blur(50px);
+      opacity: 0.18;
+    }
+
+    .smoke3 {
+      width: 220px;
+      height: 220px;
+      filter: blur(40px);
+      opacity: 0.22;
+    }
+  }
+
   .carouselPage {
     grid-template-columns: 1fr;
   }
@@ -1149,5 +1384,367 @@ main {
     width: 40px;
     height: 40px;
     font-size: 20px;
+  }
+  
+  // Hero Section Mobile Optimization
+  #heroSection {
+    padding: 16px;
+    
+    .heroContent {
+      margin-top: 0;
+    }
+    
+    .heroTitle {
+      font-size: 2.5rem;
+      margin-top: 60px;
+      margin-bottom: 20px;
+    }
+    
+    .heroTitleEffect {
+      font-size: 2.5rem;
+      top: 65px;
+    }
+    
+    .heroSubtitle {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+    
+    .heroDescription {
+      font-size: 1rem;
+      margin-bottom: 60px;
+    }
+    
+    .arrowDown {
+      width: 70px;
+      height: 70px;
+      
+      i {
+        font-size: 18px;
+      }
+    }
+  }
+  
+  // Section padding optimization
+  .section {
+    padding: 40px 16px;
+  }
+  
+  .sectionTitle {
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+  }
+  
+  .sectionTitleEffect {
+    font-size: 2.5rem;
+  }
+  
+  .sectionSubtitle {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+  
+  // Avantages Section Mobile
+  .avantagesContainer {
+    overflow-x: auto;
+  }
+  
+  .avantagesImage {
+    flex-direction: column;
+    align-items: center;
+    min-width: 320px;
+    
+    img {
+      height: 400px;
+      margin-bottom: 20px;
+    }
+  }
+  
+  .phone1Picture,
+  .phone2Picture,
+  .phone3Picture {
+    transform: none;
+    position: relative;
+    animation: none;
+  }
+  
+  .avantageBox {
+    position: relative;
+    margin-bottom: 16px;
+    min-width: 280px;
+    padding: 16px;
+    
+    &.green,
+    &.modern {
+      position: relative;
+      top: auto !important;
+      left: auto !important;
+      right: auto !important;
+    }
+  }
+  
+  // Offers Section Mobile
+  .offresContainer {
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .offreBox {
+    height: auto;
+    min-height: 400px;
+    padding: 24px;
+    
+    h3 {
+      font-size: 1.4rem;
+      margin-bottom: 24px;
+    }
+    
+    ul li {
+      font-size: 0.9rem;
+      margin-bottom: 12px;
+    }
+    
+    h4 {
+      font-size: 1rem;
+    }
+  }
+  
+  .joinButton {
+    position: relative;
+    bottom: auto;
+    margin: 20px 0 0 0;
+    width: 100%;
+    height: 48px;
+  }
+  
+  // Success Section Mobile
+  .succesContainer {
+    gap: 24px;
+  }
+  
+  .succesImages {
+    height: 200px;
+    overflow-x: auto;
+    padding: 0 16px;
+  }
+  
+  .succesImage {
+    width: 200px;
+    height: 200px;
+    position: relative;
+    display: inline-block;
+    margin-right: 16px;
+    flex-shrink: 0;
+  }
+  
+  .succesContent {
+    margin-top: -50px;
+    padding: 20px 0;
+    
+    .contentWrapper {
+      flex-direction: column;
+      text-align: center;
+      gap: 16px;
+    }
+  }
+  
+  .wrapperContent {
+    width: 100%;
+  }
+  
+  .succesContentTitle,
+  .succesContentTitleEffect {
+    font-size: 4rem;
+    text-align: center;
+  }
+  
+  .succesText {
+    h4 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 1rem;
+    }
+  }
+  
+  // Reviews Section Mobile
+  .reviewTitle {
+    font-size: 1.8rem;
+  }
+  
+  .reviewSubTitle {
+    font-size: 1.1rem;
+    margin-bottom: 32px;
+  }
+  
+  // FAQ Section Mobile
+  .faqItem {
+    margin-bottom: 12px;
+  }
+  
+  .faqQuestion {
+    padding: 16px;
+    
+    h3 {
+      font-size: 1.1rem;
+    }
+  }
+  
+  .faqAnswer p {
+    padding: 0 16px 16px;
+    font-size: 0.9rem;
+  }
+  
+  // Footer Mobile
+  .footer {
+    padding: 24px 16px 0;
+  }
+  
+  .footerContent {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  // Modal Mobile
+  .modal-content {
+    width: 95%;
+    padding: 24px;
+    margin: 16px;
+  }
+  
+  .modal-header h2 {
+    font-size: 1.5rem;
+  }
+  
+  .modal-body {
+    h3 {
+      font-size: 1.2rem;
+    }
+    
+    p {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  // Smoke responsive sizes for extra small mobile
+  #heroSection {
+    .smoke1 {
+      width: 200px;
+      height: 200px;
+      filter: blur(30px);
+      opacity: 0.18;
+    }
+
+    .smoke2 {
+      width: 260px;
+      height: 260px;
+      filter: blur(40px);
+      opacity: 0.16;
+    }
+
+    .smoke3 {
+      width: 180px;
+      height: 180px;
+      filter: blur(35px);
+      opacity: 0.20;
+    }
+  }
+
+  #offres {
+    .smoke1 {
+      width: 180px;
+      height: 180px;
+      filter: blur(25px);
+      opacity: 0.18;
+    }
+
+    .smoke2 {
+      width: 220px;
+      height: 220px;
+      filter: blur(35px);
+      opacity: 0.16;
+    }
+
+    .smoke3 {
+      width: 160px;
+      height: 160px;
+      filter: blur(30px);
+      opacity: 0.20;
+    }
+  }
+
+  // Extra small mobile optimization
+  #heroSection {
+    .heroTitle {
+      font-size: 2rem;
+    }
+    
+    .heroTitleEffect {
+      font-size: 2rem;
+    }
+    
+    .heroSubtitle {
+      font-size: 1.2rem;
+    }
+    
+    .heroDescription {
+      font-size: 0.9rem;
+      margin-bottom: 40px;
+    }
+  }
+  
+  .section {
+    padding: 32px 12px;
+  }
+  
+  .sectionTitle {
+    font-size: 2rem;
+  }
+  
+  .sectionTitleEffect {
+    font-size: 2rem;
+  }
+  
+  .avantagesImage img {
+    height: 300px;
+  }
+  
+  .avantageBox {
+    min-width: 260px;
+    padding: 12px;
+    font-size: 0.8rem;
+    
+    i {
+      font-size: 16px;
+    }
+  }
+  
+  .offreBox {
+    padding: 16px;
+    
+    ul li {
+      font-size: 0.8rem;
+    }
+  }
+  
+  .succesContentTitle,
+  .succesContentTitleEffect {
+    font-size: 3rem;
+  }
+  
+  .reviewTitle {
+    font-size: 1.5rem;
+  }
+  
+  .faqQuestion h3 {
+    font-size: 1rem;
+  }
+  
+  .modal-content {
+    padding: 16px;
   }
 }

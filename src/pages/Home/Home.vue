@@ -189,7 +189,7 @@
                 <span class="toggleIcon"></span>
               </button>
             </div>
-            <div class="faqAnswer" v-show="item.isOpen">
+            <div class="faqAnswer">
               <p>{{ item.answer }}</p>
             </div>
           </div>
@@ -305,7 +305,27 @@ const faqItems = ref([
 ])
 
 const toggleFaq = (index) => {
-  faqItems.value[index].isOpen = !faqItems.value[index].isOpen
+  const item = faqItems.value[index]
+  item.isOpen = !item.isOpen
+  
+  nextTick(() => {
+    const faqItems = document.querySelectorAll('.faqItem')
+    const faqAnswers = document.querySelectorAll('.faqAnswer')
+    
+    faqAnswers.forEach((answer, i) => {
+      if (i === index) {
+        // Get the height of the answer content
+        const answerContent = answer.querySelector('p')
+        if (item.isOpen) {
+          // If opening, set height to the content's scroll height
+          answer.style.height = answerContent.offsetHeight + 'px'
+        } else {
+          // If closing, set height to 0
+          answer.style.height = '0px'
+        }
+      }
+    })
+  })
 }
 
 // Updated reviews data with star ratings
@@ -492,6 +512,17 @@ onMounted(async () => {
   document.addEventListener('visibilitychange', handleVisibilityChange)
   await nextTick()
   startAnimation()
+  
+  // Initialize FAQ answer heights
+  const faqAnswers = document.querySelectorAll('.faqAnswer')
+  faqAnswers.forEach((answer, index) => {
+    const answerContent = answer.querySelector('p')
+    if (faqItems.value[index].isOpen) {
+      answer.style.height = answerContent.offsetHeight + 'px'
+    } else {
+      answer.style.height = '0px'
+    }
+  })
 })
 
 onUnmounted(() => {
@@ -530,5 +561,17 @@ onUnmounted(() => {
 
 .boldStyle {
   font-weight: 900;
+}
+
+main {
+  padding-top: 80px; // Header height
+  
+  @media (max-width: 768px) {
+    padding-top: 100px; // Adjusted for mobile header height
+  }
+  
+  @media (max-width: 480px) {
+    padding-top: 80px; // Adjusted for smaller mobile header height
+  }
 }
 </style>

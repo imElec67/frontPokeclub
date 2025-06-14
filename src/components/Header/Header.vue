@@ -173,18 +173,25 @@ onUnmounted(() => {
   top: 0;
   left: 0;
   right: 0;
+  width: 100%;
   background-color: transparent;
   z-index: 1000;
   height: 152px;
+  transform: translateZ(0);
+  backface-visibility: hidden;
 }
 
 .headerContent {
   position: relative;
   height: 100%;
+  width: 100%;
+  max-width: 100vw;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0px;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .logoContainer {
@@ -194,6 +201,7 @@ onUnmounted(() => {
   z-index: 10;
   padding-left: 30px;
   padding-right: 30px;
+  flex-shrink: 0;
 
   img {
     width: 90px;
@@ -211,6 +219,7 @@ onUnmounted(() => {
   display: flex;
   padding-left: 30px;
   padding-right: 30px;
+  flex-shrink: 0;
 }
 
 .particlesContainer {
@@ -242,6 +251,7 @@ onUnmounted(() => {
   left: 50%;
   transform: translateX(-50%);
   z-index: 1;
+  white-space: nowrap;
 }
 
 .navLink {
@@ -280,6 +290,67 @@ onUnmounted(() => {
     background-color: $textColorPop;
     color: $textColor;
     box-shadow: 0px 4px 4px 0px rgba(114, 79, 24, 0.5);
+  }
+}
+
+// Mobile responsive styles
+@media (max-width: 768px) {
+  .header {
+    height: 100px;
+  }
+  
+  .navigation {
+    display: none;
+  }
+  
+  .logoContainer {
+    padding-left: 16px;
+    padding-right: 16px;
+    
+    img {
+      width: 70px;
+      height: 70px;
+    }
+  }
+  
+  .buttonContainer {
+    width: 180px;
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+  
+  .joinButton {
+    height: 45px;
+    font-size: 14px;
+    line-height: 45px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header {
+    height: 80px;
+  }
+  
+  .logoContainer {
+    padding-left: 12px;
+    padding-right: 8px;
+    
+    img {
+      width: 60px;
+      height: 60px;
+    }
+  }
+  
+  .buttonContainer {
+    width: 160px;
+    padding-left: 8px;
+    padding-right: 12px;
+  }
+  
+  .joinButton {
+    height: 40px;
+    font-size: 12px;
+    line-height: 40px;
   }
 }
 </style>
