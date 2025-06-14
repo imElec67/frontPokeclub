@@ -10,8 +10,8 @@
       <FaqSection />
     </main>
     <FooterSection @openTermsModal="showTermsModal = true" />
-
-    <!-- Terms & Conditions Modal -->
+  </div>
+  <!-- Terms & Conditions Modal -->
     <div v-if="showTermsModal" class="modal-overlay" @click="showTermsModal = false">
       <div class="modal-content" @click.stop>
         <div class="modal-header">
@@ -41,7 +41,6 @@
         </div>
       </div>
     </div>
-  </div>
 </template>
 
 <script setup>
